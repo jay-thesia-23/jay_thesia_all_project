@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="/tic_tac_toe.css" rel="stylesheet" type="text/css" />
+    <!-- 
+    <link href="../public/css/" type="stylesheet"> -->
+    <title>Home</title>
+  </head>
+  <body>
+    Welcome, <%=getname%>
+
+    <form action="/home" method="POST" onclick="submit()">
+      <div class="">
+        <div class="">
+          <a href="../publicProjects/tik-tac-toe/tic_tac_toe.html">Tic Tac Toe</a>
+        </div>
+
+        <div class="">
+          <a href="../publicProjects/colorChange/index.html">Color Change</a>
+        </div>
+
+        <div class="">
+          <a href="/save">Grid</a>
+        </div>
+
+        <div class="">
+          <a href="../publicProjects/ehyaDesign/index.html">Ehya HTML 1</a>
+        </div>
+
+        <div class="">
+          <a href="../publicP/ehyaStock/index.html">Ehya HTML 2</a>
+        </div>
+
+        <div class="">
+          <a href="/search">Search it</a>
+        </div>
+
+        <div class="">
+          <a href="/">Job form</a>
+        </div>
+      </div>
+
+      <input type="submit" id="submit" value="LOGOUT" name="logout" />
+    </form>
+  </body>
+
+  <script src="../public/js/tic_tac_toe.js"></script>
+  <script>
+    function submit() {
+      console.log("clicked");
+    }
+  </script>
+</html>

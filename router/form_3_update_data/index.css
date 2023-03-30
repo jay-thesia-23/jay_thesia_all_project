@@ -1,0 +1,16 @@
+label{
+    margin-left: 10px;
+    
+}
+fieldset{
+    margin-bottom: 50px;
+    background-color:  rgb(174, 194, 202);
+
+}
+
+table,tr,td{
+    padding-bottom: 10px;
+}
+body{
+    background-color: rgb(131, 166, 181);
+}

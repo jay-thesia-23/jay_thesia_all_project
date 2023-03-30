@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../public/css/index.css" rel="stylesheet" type="text/css" />
+
+    <%- include('message') %>
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="content">
+        <img src="../public/assets/logo.svg" alt="" srcset="" id="logo" />
+
+        <form action="/login" method="POST" onsubmit="validations()">
+          <label for="" id="wel">Welcome Back</label>
+
+          <label for="">Email: </label>
+          <div class="input">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+
+          <label for="">Password: </label>
+          <div class="input">
+            <input
+              type="text"
+              name="password"
+              id="password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+              onfocusout=""
+            />
+          </div>
+
+          <p id="showError"></p>
+
+          <div class="btn">
+            <input
+              type="submit"
+              name="Sign in"
+              id="submit"
+              value="Sign in"
+              
+            />
+          </div>
+        </form>
+
+        <p id="login">Don't have account ? <a href="/register">Sign up</a></p>
+      </div>
+
+      <div class="logoBottom">
+        <img src="../public/assets/bottom-logo.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      function validations() {
+        let error = document.getElementById("showError");
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("password").value;
+
+        if (email == "" || pass == "") {
+          error.innerHTML = "Please fill all the fields";
+          return false;
+        } else {
+          // fetch("/login", {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-type": "application/json",
+          //   },
+          //   body: JSON.stringify({
+          //     email: email,
+          //     password: pass,
+          //   }),
+          // })
+          //   .then((res) => {
+          //     return res.json();
+          //   })
+          //   .then((res) => {
+          //     console.log(res);
+          //     if (res == false) {
+          //       document.getElementById("showError").innerHTML =
+          //         "Username or password is wrong";
+          //     } if(res=="true"){
+          //       console.log("inside the elsse");
+          //       document.getElementById("submit").disabled = false;
+          //       document.getElementById("submit").style.backgroundColor =
+          //         "green";
+          //     }
+          //   });
+        }
+
+        return false;
+      }
+    </script>
+  </body>
+</html>

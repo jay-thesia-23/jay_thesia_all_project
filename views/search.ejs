@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Details</title>
+  </head>
+  <body>
+    <form action="">
+      <input
+        type="text"
+        placeholder="Search here..."
+        id="search"
+        name="search"
+      
+        
+      />
+      <input type="submit" value="Search" id="search" />
+      <input type="reset" value="clear" id="clear" />
+    </form>
+
+    <div id="delimeters">
+      <label>^ = firstName</label>
+      <lable>$ = Lastname</lable>
+      <lable>- = City</lable>
+      <lable>~ = MobileNo</lable>
+      <lable>@ = Gender</lable>
+    </div>
+    <table align="center">
+      <tr>
+        <th>Candidate ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>MobileNo</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Gender</th>
+        <th>Zip code</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Relationship</th>
+        <th>Designation</th>
+        <th>created record date</th>
+      </tr>
+
+      <%resu.forEach(q1=>{%>
+      <tr>
+        <td><%=q1.candidate_id%></td>
+        <td><%=q1.firstname%></td>
+        <td><%=q1.lastname%></td>
+        <td><%=q1.phone_number%></td>
+        <td><%=q1.city%></td>
+        <td><%=q1.state%></td>
+        <td><%=q1.gender%></td>
+        <td><%=q1.zip_code%></td>
+        <td><%=q1.birth_date%></td>
+        <td><%=q1.address%></td>
+        <td><%=q1.relationship%></td>
+        <td><%=q1.designation%></td>
+        <td><%=q1.create_data%></td>
+      </tr>
+      <%})%>
+    </table>
+
+    <div class="pagination">
+      <%for(let i=1;i<=count_arr;i++){ %>
+      <a href="/search?id=<%=i %> "> <%=(i) %></a>
+      <% }%>
+    </div>
+  </body>
+</html>

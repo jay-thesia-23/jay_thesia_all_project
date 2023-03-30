@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link href="/public/css/index.css" rel="stylesheet" type="text/css" />
+
+    <!-- <%- include('message') %> -->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="content">
+        <img src="/public/assets/logo.svg" alt="" srcset="" id="logo" />
+
+        <form
+          action="/register"
+          method="POST"
+          onsubmit="return validations()"
+          
+        >
+          <label for="" id="wel">Welcome </label>
+          <label for="" id="name">Name: </label>
+          <div class="input">
+            <input
+              type="text"
+              name="name"
+              id="fname"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+    
+            />
+          </div>
+
+          <label for="">Email: </label>
+          <div class="input">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+              onchange="emailExist()"
+            />
+          </div>
+
+          <label for="">Password: </label>
+          <div class="input">
+            <input
+              type="text"
+              name="password"
+              id="password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            
+            />
+          </div>
+
+          <label for="">Confirm Password: </label>
+          <div class="input">
+            <input
+              type="text"
+              name="con_password"
+              id="con_password"
+              value="<%= typeof con_password != 'undefined' ? con_password : '' %>"
+            
+            />
+          </div>
+
+          <p id="showError"></p>
+
+          <div class="btn">
+            <input
+              type="submit"
+              name="Sign up"
+              value="Sign up"
+              id="submit"
+              disabled
+            />
+          </div>
+        </form>
+
+        <p id="login">Already have account ? <a href="/login">Sign in</a></p>
+      </div>
+
+      <div class="logoBottom">
+        <img src="/public/assets/bottom-logo.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      var flagValidation = 1;
+
+      function validations() {
+        let error = document.getElementById("showError");
+        let name = document.getElementById("fname").value;
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("password").value;
+        let con_pass = document.getElementById("con_password").value;
+        let submit = document.getElementById("submit");
+
+        console.log(name + " " + "name");
+
+        // submit.disbled=true;
+        if (name == "" || email == "" || pass == "" || con_pass == "") {
+          error.innerHTML = "Please fill all the fields"; 
+          return false;
+        } else if (pass.length < 6) {
+          error.innerHTML=""
+          error.innerHTML = "Length of the password atleast 6 character";
+          return false;
+          
+        } else if (pass != con_pass) {
+          error.innerHTML=""
+          error.innerHTML = "Password and confirm password is not same";
+          return false;
+          
+        }
+
+        // if(flagValidation==1){
+        //   submit.disbled=false;
+        // }
+        return true;
+      }
+
+      function emailExist() {
+
+        let name = document.getElementById("fname").value;
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("password").value;
+        let con_pass = document.getElementById("con_password").value;
+
+
+        fetch("/register", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            name:name,
+          
+          }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            if (res == true) {
+              document.getElementById("submit").disabled = true;
+              document.getElementById("submit").style.backgroundColor = "#024B02";
+              document.getElementById("showError").innerHTML =
+                "User is already exist";
+            } else {
+              console.log("inside the elsse");
+              document.getElementById("showError").innerHTML = "";
+              document.getElementById("submit").disabled = false;
+              document.getElementById("submit").style.backgroundColor = "green";
+            }
+          });
+
+
+      }
+    </script>
+  </body>
+</html>

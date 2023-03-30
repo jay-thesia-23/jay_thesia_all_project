@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <h1>Tic Tac Toe</h1>
+
+    <h3>X's Score: <span class="scoreX"></span> </h3>
+    <h3>O's Score: <span class="scoreO"></span></h3>
+    <h3>Draw:      <span class="scoreD"></span></h3>
+    <table  id="table">
+        <tr id="tr">
+            <td id="one" onclick="disable(this.id)"></td>
+            <td id="two" onclick="disable(this.id)"></td>
+            <td id="three" onclick="disable(this.id)"></td>
+        </tr>
+
+        <tr id="tr">
+            <td id="four" onmouseup="disable(this.id)"></td>
+            <td id="five" onmouseup="disable(this.id)"></td>
+            <td id="six" onmouseup="disable(this.id)"></td>
+        </tr>
+
+        <tr id="tr">
+            <td id="seven" onmouseup="disable(this.id)"></td>
+            <td id="eight" onmouseup="disable(this.id)"></td>
+            <td id="nine" onmouseup="disable(this.id)"></td>
+        </tr>
+
+      
+    </table>
+
+    <div class="">
+        <p id="nextClick"> </p>
+        <p id="win"> </p>
+    </div>
+
+    <script src="/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+body {
+    background-image: url("../assets/auth-bg.png");
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 0 0;
+  }
+  
+  .container {
+    width: 1100px;
+    margin: 0 auto;
+    color: white;
+  }
+  
+  .content {
+    background-color: #111111bb;
+    width: 30%;
+    height: 742px;
+    padding: 30px;
+  }
+  
+  #logo {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .input {
+    margin-bottom: 30px;
+  }
+  input {
+    width: 100%;
+  }
+  
+  .btn {
+    margin: 0 auto;
+  }
+  #submit {
+    padding: 5px 10px;
+    background-color: rgb(2, 75, 2);
+    color: white;
+    font-weight: 600;
+  }
+  
+  a {
+    text-decoration: none;
+    color: yellow;
+  }
+  #wel {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 40px;
+  }
+  
+  #login {
+    margin-top: 50px;
+  }
+  
+  .logoBottom {
+    position: absolute;
+    bottom: 10px;
+    right: 180px;
+  }

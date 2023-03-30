@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      label {
+        margin-left: 10px;
+      }
+      fieldset {
+        margin-bottom: 50px;
+        background-color: rgb(174, 194, 202);
+      }
+
+      table,
+      tr,
+      td {
+        padding-bottom: 10px;
+      }
+      body {
+        background-color: rgb(131, 166, 181);
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="/index.css" /> -->
+    <title>Candidature Form</title>
+  </head>
+
+  <body>
+    <form action="/form" method="POST">
+
+    <fieldset>
+      <table>
+        <legend>Basic Details</legend>
+
+        <tr>
+          <td><label for="">First Name: </label></td>
+          <td><input type="text" name="fname" id="fname" /></td>
+
+          <td style="margin: auto 0px"><label for="">Last Name: </label></td>
+          <td><input type="text" name="lname" id="lname" /></td>
+        </tr>
+
+        <tr></tr>
+
+        <tr>
+          <td><label for="">Designation: </label></td>
+          <td><input type="text" name="designation" /></td>
+          <td><label for="">Email: </label></td>
+          <td><input type="email" name="email"/></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Address: </label></td>
+          <td>
+            <textarea name="address" id="address" cols="30" rows="10"></textarea>
+          </td>
+
+          <td><label for="">State: </label></td>
+          <td>
+            <select name="stateSel" id="stateSel" placeholder="state" onchange="check()">
+
+                <option value="" disabled selected>Select your State</option>
+                <% for(let i=0;i<data.length;i++){ %>   
+                
+                    <option value=<%=data[i].state_name%> ><%=data[i].state_name%></option>
+                
+                <%}%>
+             
+            </select>
+          </td>
+
+
+         
+        </tr>
+
+        <tr>
+          <td><label for="">Phone No: </label></td>
+          <td>
+            <input type="text" name="mobile" />
+          </td>
+
+          <td><label for="">City: </label></td>
+
+          <td>
+            <select name="city" id="city">
+              <option value="Select your city" disabled selected>Select your city</option>
+
+              <div id="add"></div>
+            </select>
+          </td>
+
+            </tr>
+
+        <tr> 
+          <td><label for="" name="gender">Gender:</label></td>
+          <td>
+            <input type="radio" name="gender" value="male" />Male
+            <input type="radio" name="gender" value="female" />Female
+            <input type="radio" name="gender" value="other" />other
+          </td>
+
+          <td><label for="">Zip code</label></td>
+          <td><input type="number" name="zip" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">RelationShip: </label></td>
+          <td>
+            <select name="relationship" id="">
+              <option value="" disabled selected>Status</option>
+              <option value="single" name="relationship">single</option>
+              <option value="married" name="relationship">married</option>
+            </select>
+          </td>
+
+          <td><label for="">Date: </label></td>
+
+          <td><input type="date" name="date" id="date" /></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <legend>Education Details</legend>
+      <table id="courseTable">
+        <tr>
+          <td><label for="" id="course">Course: </label></td>
+          <td>
+            <select name="course" id="courseValues">
+              <option value="" disabled selected>Course</option>
+              <% for(let i=0;i<data3.length;i++){ %>   
+                
+                <option value=<%=data3[i].option_name%> name="course"><%=data3[i].option_name%></option>
+             <%}%>
+            </select>
+          </td>
+
+          <td><label for="" id="percent">Percentage: </label></td>
+          <td><input type="text" id="percentValue" name="percentage"/></td>
+
+          <td><label for="" id="board" name="university">Board/University: </label></td>
+        
+          <td>
+            <select name="university" id="universityValues">
+              <option value="" disabled selected>University</option>
+              <% for(let i=0;i<data5.length;i++){ %>   
+                
+                <option value=<%=data5[i].option_name%> name="university"><%=data5[i].option_name%></option>
+             <%}%>
+            </select>
+          </td>
+          
+          <td><label for="" id="year">Starting Year: </label></td>
+          <td><input type="text" id="yearStartValue" name="yearStart" /></td>
+
+          <td><label for="" id="year">Passing Year: </label></td>
+          <td><input type="text" id="yearEndValue" name="yearEnd" /></td>
+        </tr>
+
+      
+      </table>
+
+      
+      <input type="submit" value="Add More Field" onclick="return addEducation()">
+    </fieldset>
+
+    <fieldset>
+      <legend>Experience Details</legend>
+      <table id="experiencetbl">
+        <tr>
+          <td><label for="">Company Name: </label></td>
+          <td><input type="text" name="companyName" /></td>
+          <td><label for="">Designation: </label></td>
+          <td><input type="text" name="designationPast" /></td>
+
+          <td><label for="">From</label></td>
+          <td><input type="date" name="from" /></td>
+
+          <td><label for="">To</label></td>
+          <td><input type="date" name="to"  /></td>
+        </tr>
+
+        
+      </table>
+
+      <span onclick="return addExperience()" value="Add Experience" style="background-color: brown;">Add more Experience</span>
+    
+    </fieldset>
+
+
+    <!-- *********************Tech***************************************** -->
+    <fieldset>
+      <table id="techtbl">
+        <legend>Technology Details</legend>
+        <tr>
+          
+            <%for(let i=0;i<data6.length;i++){%> 
+          <tr>
+
+            <td>  <input type="checkbox" name="tech" id="tech" value=<%=data6[i].option_name%>><label><%=data6[i].option_name%></label></td>
+          
+
+              <td><input type="radio"  id="beginner" value="begineer" name="<%=data6[i].option_name%>"><label for="">Beginner</label></td>
+              <td><input type="radio"  id="modrator" value="moderator" name="<%=data6[i].option_name%>"><label for="">Modrator</label></td>
+              <td><input type="radio"  id="expert" value="expert" name="<%=data6[i].option_name%>"><label for="">Expert</label></td>
+            
+          </tr>
+          <%}%>
+          
+        </tr>
+      </table>
+
+     
+    </fieldset>
+
+    <fieldset>
+      
+        <legend>Language Details</legend>
+        <table>
+          <% for(let i=0;i<data7.length;i++){%>
+          <tr>
+          <td><input type="checkbox" id="lk" name="lang" value=<%=data7[i].option_name%>>
+          <label for="lk1"><%=data7[i].option_name%></label>
+          <input type="checkbox" id="lk1" name="read" value=<%=data7[i].option_name%>>
+          <label for="lk2">Read</label>
+          <input type="checkbox" id="lk2" name="write" value=<%=data7[i].option_name%>>
+          <label for="lk3">Write</label>
+          <input type="checkbox" id="lk3" name="speak" value=<%=data7[i].option_name%>>
+          <label for="lk3">Speak</label>
+          </tr>
+          <%}%>
+          
+          
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <table>
+        <legend>Reference Contact</legend>
+
+        <tr>
+          <td>Person 1:</td>
+        </tr>
+        <tr>
+          <td><label for="">Name: </label></td>
+          <td><input type="text" name="p1"/></td>
+
+          <td><label for="">Contact No:</label></td>
+          <td><input type="text" name="con1"/></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Relation: </label></td>
+          <td><input type="text" name="rel1"/></td>
+
+          <td><label for="">Email:</label></td>
+          <td><input type="email" name="email1" /></td>
+        </tr>
+
+        <tr>
+          <td>Person 2:</td>
+        </tr>
+        <tr>
+          <td><label for="">Name: </label></td>
+          <td><input type="text" name="p2" /></td>
+
+          <td><label for="">Contact No:</label></td>
+          <td><input type="text" name="con2"/></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Relation: </label></td>
+          <td><input type="text" name="rel2"/></td>
+
+          <td><label for="">Email:</label></td>
+          <td><input type="email" name="email2"/></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <legend>Prefrence</legend>
+      <table>
+        <tr>
+          <td><label for="">Location1: </label></td>
+          <td><input type="text" name="loc1" /></td>
+
+          <td><label for="">Location2:</label></td>
+          <td><input type="text" name="loc2"/></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Location3:</label></td>
+          <td><input type="text" name="loc3"/></td>
+
+          <td><label for="">Notice Period</label></td>
+          <td><input type="text" name="notice" id=""></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Expected CTC:</label></td>
+          <td><input type="text" name="ctcExp"/></td>
+
+          <td><label for="">Current CTC:</label></td>
+          <td><input type="text" name="ctcCurr"/></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Department: </label></td>
+          <td>
+            <select name="department" id="">
+              <option value="" disabled selected>Department</option>
+              <% for(let i=0;i<data2.length;i++){ %>   
+                
+                <option value=<%=data2[i].option_name%> name="department"><%=data2[i].option_name%></option>
+                      
+                      <%}%>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <input type="submit" name="submit" id="" value="Submit" />
+</form>
+
+    <!-- <script src="./index.js"></script> -->
+  </body>
+
+
+  <script>
+
+
+  let addEdu = document.getElementById("newEdu");
+  let mainEdu = document.getElementById("courseTable").value;
+
+  let eduCount = 1;
+  let techCount = 1;
+  let expCount = 1;
+
+  function addEducation() {
+    let table = document.getElementById("courseTable");
+    eduCount++;
+    let row = table.insertRow();
+    //    let tr=document.createElement('tr');
+
+    row.innerHTML += `  <table id="courseTable">
+        <tr>
+          <td><label for="" id="course">Course: </label></td>
+          <td>
+            <select name="course" id="courseValues">
+              <option value="" disabled selected>Course</option>
+              <% for(let i=0;i<data3.length;i++){ %>   
+                
+                <option value=<%=data3[i].option_name%> name="course"><%=data3[i].option_name%></option>
+             <%}%>
+            </select>
+          </td>
+
+          <td><label for="" id="percent">Percentage: </label></td>
+          <td><input type="text" id="percentValue" name="percentage"/></td>
+
+          <td><label for="" id="board" name="university">Board/University: </label></td>
+        
+          <td>
+            <select name="university" id="universityValues">
+              <option value="" disabled selected>University</option>
+              <% for(let i=0;i<data5.length;i++){ %>   
+                
+                <option value=<%=data5[i].option_name%> name="university"><%=data5[i].option_name%></option>
+             <%}%>
+            </select>
+          </td>
+          
+          <td><label for="" id="year">Starting Year: </label></td>
+          <td><input type="text" id="yearStartValue" name="yearStart" /></td>
+
+          <td><label for="" id="year">Passing Year: </label></td>
+          <td><input type="text" id="yearEndValue" name="yearEnd" /></td>
+        </tr>
+
+      
+      </table>
+    `;
+
+    return false;
+  }
+
+  function addExperience() {
+    let table = document.getElementById("experiencetbl");
+    let row = table.insertRow();
+
+    row.innerHTML += `<table id="experiencetbl">
+        <tr>
+          <td><label for="">Company Name: </label></td>
+          <td><input type="text" name="companyName" /></td>
+          <td><label for="">Designation: </label></td>
+          <td><input type="text" name="designationPast" /></td>
+
+          <td><label for="">From</label></td>
+          <td><input type="date" name="from" /></td>
+
+          <td><label for="">To</label></td>
+          <td><input type="date" name="to"  /></td>
+        </tr>
+
+        
+      </table>
+`;
+
+        return false;
+  }
+
+  var valueState;
+  var temp="";
+  var city;
+
+
+function check(){
+   valueState=document.getElementById("stateSel");
+   city=document.getElementById("city");
+
+  // console.log(valueState);
+
+
+fetch("/getCity?state="+valueState.value)
+.then(res=> res.json())
+.then((response2)=>{
+  temp=""
+console.log(response2);
+
+        for(var i = 0; i < response2.length; i++)
+        {
+            temp += '<option value="'+response2[i].city_name+'">'+response2[i].city_name+'</option>';
+            
+        }
+        city.innerHTML=temp
+})
+
+}
+
+   </script>
+</html>
+
+

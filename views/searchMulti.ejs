@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <style>
+      table {
+        margin-top: 20px;
+      }
+
+      table,
+      tr,
+      td,
+      th {
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      tr,
+      td {
+        background-color: #aad8a6;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      th {
+        background-color: #4caf50;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      a {
+        font-size: 25px;
+      }
+
+      .noActive,
+      a {
+        background-color: #4caf50;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      .activeLink {
+        background: #aad8a6;
+      }
+
+      .pagination a:hover {
+        background-color: rgb(200, 200, 200);
+      }
+
+      #email {
+        width: 110px;
+      }
+
+      #search,
+      #clear {
+        padding: 10px;
+        border-radius: 15px;
+      }
+
+      #select {
+        padding: 10px;
+      }
+
+      #textSearch {
+        font-size: 30px;
+      }
+
+      /* .delimeters{
+
+        font
+      } */
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">Student Express</h1>
+    <div id="main" style="text-align: center; margin-left: 0px">
+      <form>
+        <select name="" id="select">
+          <option value="" disabled selected>Search ON</option>
+          <option value="">First Name</option>
+          <option value="">Last Name</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Search here..."
+          id="search"
+          name="search"
+          value=<%=search%>
+        />
+        <input type="submit" value="Search" id="search" />
+        <input type="reset" value="clear" id="clear" />
+      </form>
+
+      <label for="" id="textSearch">You Search for : <%= search %></label>
+
+      <div id="delimeters">
+        <label>^ = firstName</label>
+        <lable>$ = Lastname</lable>
+        <lable>- = city</lable>
+        <lable>~ = MobileNo</lable>
+        <lable>@ = college</lable>
+      </div>
+
+      <table align="center">
+        <tr>
+          <th>
+            <a href="/show?id=1&&col_name=StudentID&&sort=<%=sort%>"
+              >Student ID</a
+            >
+          </th>
+          <th>
+            <a href="/show?id=1&&col_name=FirstName&&sort=<%=sort%>"
+              >First Name</a
+            >
+          </th>
+          <th>
+            <a href="/show?id=1&&col_name=LastName&&sort=<%=sort%>"
+              >Last Name</a
+            >
+          </th>
+          <th>
+            <a href="/show?id=1&&col_name=MobileNo&&sort=<%=sort%>">MobileNo</a>
+          </th>
+          <th>
+            <a href="/show?id=1&&col_name=Email&&sort=<%=sort%>" id="email"
+              >Email</a
+            >
+          </th>
+          <th><a href="/show?id=1&&col_name=city&&sort=<%=sort%>">City</a></th>
+          <th>
+            <a href="/show?id=1&&col_name=collegeName&&sort=<%=sort%>"
+              >College</a
+            >
+          </th>
+          <th>
+            <a href="/show?id=1&&col_name=birthdate&&sort=<%=sort%>"
+              >birth date</a
+            >
+          </th>
+          <!-- <th>Record creation date</th> -->
+        </tr>
+
+        <%resu.forEach(q1=>{%>
+        <tr>
+          <td><%=q1.StudentID%></td>
+          <td><%=q1.FirstName%></td>
+          <td><%=q1.LastName%></td>
+          <td><%=q1.MobileNo%></td>
+          <td><%=q1.Email%></td>
+          <td><%=q1.city%></td>
+          <td><%=q1.collegeName%></td>
+          <td><%=q1.birthdate.toJSON('yyyy-mm-dd').slice(0,10)%></td>
+          <!-- <td><%=q1.createdate%></td> -->
+        </tr>
+        <%})%>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <!-- <a href="#">&laquo;<                                                                                                   /a> -->
+
+      <%for(let i=1;i<=count_arr;i++){ %>
+      <a
+        href="/show?id=<%=i %>&&col_name=<%= col_name%>&&sort=<%= sort%>"
+        class="<%= i==page ? 'noActive' : 'activeLink' %>"
+      >
+        <%=(i) %></a
+      >
+      <% }%>
+
+      <!-- <a href="#">&raquo;</a> -->
+
+      <!-- <script>
+        var links = document.getElementsByTagName("a");
+
+        console.log(links);
+
+        for (var i = 0; i < links.length; i++) {
+          links[i].onclick = function () {
+            this.style.backgroundColor = "red";
+          };
+        }
+      </script> -->
+    </div>
+  </body>
+</html>

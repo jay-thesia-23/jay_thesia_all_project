@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="index.css" />
+    <title>Candidature Form</title>
+  </head>
+
+
+  <body>
+    <form action="" method="post"></form>
+
+    <fieldset>
+      <table>
+        <legend>Basic Details</legend>
+
+        <tr>
+          <td><label for="">First Name: </label></td>
+          <td><input type="text" name="" /></td>
+
+          <td style="margin: auto 0px"><label for="">Last Name: </label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr></tr>
+
+        <tr>
+          <td><label for="">Designation: </label></td>
+          <td><input type="text" /></td>
+          <td><label for="">Email: </label></td>
+          <td><input type="email" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Address: </label></td>
+          <td>
+            <textarea name="address" id="address" cols="20" rows="7">
+            </textarea>
+          </td>
+
+          <td><label for="">City: </label></td>
+
+          <td>
+            <input type="text" name="city" id="city" />
+          </td>
+        </tr>
+
+        <tr>
+          <td><label for="">Phone No: </label></td>
+          <td>
+            <input type="text" />
+          </td>
+
+          <td><label for="">State: </label></td>
+          <td>
+            <select name="City" id="" placeholder="City">
+              <option value="" disabled selected>State</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Bihar">Bihar</option>
+              <option value="MP">Rajkot</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td><label for="" name="gender">Gender:</label></td>
+          <td>
+            <input type="radio" name="gender" value="male" />Male
+            <input type="radio" name="gender" value="female" />Female
+            <input type="radio" name="gender" value="other" />other
+          </td>
+
+          <td><label for="">Zip code</label></td>
+          <td><input type="number" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">RelationShip: </label></td>
+          <td>
+            <select name="RelationShip" id="">
+              <option value="" disabled selected>Status</option>
+              <option value="single">single</option>
+              <option value="married">married</option>
+            </select>
+          </td>
+
+          <td><label for="">Date: </label></td>
+
+          <td><input type="date" name="date" id="date" /></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <legend>Education Details</legend>
+      <table id="courseTable">
+        <tr>
+          <td><label for="" id="course">Course: </label></td>
+          <td>
+            <select name="course" id="courseValues">
+              <option value="" disabled selected>Course</option>
+              <option value="ssc">SSC</option>
+              <option value="hsc">HSC</option>
+              <option value="graduate">Graduation</option>
+              <option value="pg">Post Graduation</option>
+            </select>
+          </td>
+
+          <td><label for="" id="percent">Percentage: </label></td>
+          <td><input type="number" id="percentValue" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="" id="board">Board/University: </label></td>
+          <td><input type="text" id="boardName" /></td>
+          <td><label for="" id="year">Passing Year: </label></td>
+          <td><input type="number" id="yearValue" /></td>
+        </tr>
+      </table>
+
+      <button onclick="addEducation()">Add More Field</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Experience Details</legend>
+      <table id="experiencetbl">
+        <tr>
+          <td><label for="">Company Name: </label></td>
+          <td><input type="text" /></td>
+          <td><label for="">Designation: </label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">From</label></td>
+          <td><input type="date" /></td>
+
+          <td><label for="">To</label></td>
+          <td><input type="date" name="" id="" /></td>
+        </tr>
+      </table>
+
+      <button onclick="addExperience()">Add Experience</button>
+    </fieldset>
+
+    <fieldset>
+      <table id="techtbl">
+        <legend>Technology Details</legend>
+        <tr>
+          <div>
+            <input type="checkbox" name="tech" id="tech" value="java" /><label
+              for=""
+              >JAVA</label
+            >
+            <input type="radio" name="tech" id="beginner" /><label for=""
+              >Beginner</label
+            >
+            <input type="radio" name="tech" id="modrator" /><label for=""
+              >Modrator</label
+            >
+            <input type="radio" name="tech" id="expert" /><label for=""
+              >Expert</label
+            >
+          </div>
+
+          <div>
+            <input type="checkbox" name="tech" id="tech" value="js" /><label
+              for=""
+              >JS</label
+            >
+            <input type="radio" name="tech" id="beginner" /><label for=""
+              >Beginner</label
+            >
+            <input type="radio" name="tech" id="modrator" /><label for=""
+              >Modrator</label
+            >
+            <input type="radio" name="tech" id="expert" /><label for=""
+              >Expert</label
+            >
+          </div>
+          <div>
+            <input type="checkbox" name="tech" id="tech" value="git" /><label
+              for=""
+              >GIT</label
+            >
+            <input type="radio" name="tech" id="beginner" /><label for=""
+              >Beginner</label
+            >
+            <input type="radio" name="tech" id="modrator" /><label for=""
+              >Modrator</label
+            >
+            <input type="radio" name="tech" id="expert" /><label for=""
+              >Expert</label
+            >
+          </div>
+        </tr>
+      </table>
+
+      <input
+        type="button"
+        name="Add Tech"
+        value="Add Tech"
+        onclick="addTech()"
+      />
+    </fieldset>
+
+    <fieldset>
+      <table>
+        <legend>Language Details</legend>
+        <tr>
+          <td><input type="checkbox" /><label for="">English</label></td>
+          <td><input type="checkbox" /><label for="">Read</label></td>
+          <td><input type="checkbox" /><label for="">Write</label></td>
+          <td><input type="checkbox" /><label for="">Speak</label></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /><label for="">Hindi</label></td>
+          <td><input type="checkbox" /><label for="">Read</label></td>
+          <td><input type="checkbox" /><label for="">Write</label></td>
+          <td><input type="checkbox" /><label for="">Speak</label></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /><label for="">Gujarati</label></td>
+          <td><input type="checkbox" /><label for="">Read</label></td>
+          <td><input type="checkbox" /><label for="">Write</label></td>
+          <td><input type="checkbox" /><label for="">Speak</label></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <table>
+        <legend>Reference Contact</legend>
+
+        <tr>
+          <td>Person 1:</td>
+        </tr>
+        <tr>
+          <td><label for="">Name: </label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Contact No:</label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Relation: </label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Email:</label></td>
+          <td><input type="email" /></td>
+        </tr>
+
+        <tr>
+          <td>Person 2:</td>
+        </tr>
+        <tr>
+          <td><label for="">Name: </label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Contact No:</label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Relation: </label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Email:</label></td>
+          <td><input type="email" /></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <legend>Prefrence</legend>
+      <table>
+        <tr>
+          <td><label for="">Location1: </label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Location2:</label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Location3:</label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Expected CTC:</label></td>
+          <td><input type="text" /></td>
+
+          <td><label for="">Current CTC:</label></td>
+          <td><input type="text" /></td>
+        </tr>
+
+        <tr>
+          <td><label for="">Department: </label></td>
+          <td>
+            <select name="Department" id="">
+              <option value="" disabled selected>Department</option>
+              <option value="Dev">Dev</option>
+              <option value="Design">Design</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <input type="button" name="Submit" id="" value="Submit" />
+
+    <script src="./index.js"></script>
+  </body>
+</html>

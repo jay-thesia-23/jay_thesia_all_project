@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>link</title>
+  </head>
+  <body>
+    <p>Please validate the email</p>
+
+    <form method="POST">
+      <input
+        type="submit"
+        id="submit"
+        value="LINK"
+        name="linkactive"
+        onchange="emailChecked()"
+      />
+    </form>
+  </body>
+
+  <script>
+    function emailChecked() {
+      let btnClick = document.getElementById("submit");
+      console.log("button is clicked");
+    }
+  </script>
+</html>

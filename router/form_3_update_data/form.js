@@ -340,154 +340,157 @@ app.get("/searchform", authentication, (req, res) => {
 
   console.log(arrAns, "answer ans arr");
 
-  for (let i = 0; i < arrAns.length; i++) {
-    let currchar = arrAns[i][0];
+  // for (let i = 0; i < arrAns.length; i++) {
 
-    console.log(currchar, "ansswer");
+  let i = 0;
+  let currchar = arrAns[0];
+  console.log("name1=" + currchar);
 
-    //fname
-    if (currchar == "^") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
+  console.log(currchar, "ansswer");
 
-        if (
-          newchar == "$" ||
-          newchar == "-" ||
-          newchar == "~" ||
-          newchar == "@" ||
-          newchar == "#" ||
-          newchar == "^"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij" + " " + currchar);
-          break;
-        }
+  //fname
+  if (currchar == "^") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns[j];
 
-        searchFname += newchar;
+      if (
+        newchar == "$" ||
+        newchar == "-" ||
+        newchar == "~" ||
+        newchar == "@" ||
+        newchar == "#" ||
+        newchar == "^"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij" + " " + currchar);
+        break;
       }
 
-      fNameArr.push(searchFname);
-      searchFname = "";
-      console.log(fNameArr);
+      searchFname += newchar;
     }
 
-    //lname
-    if (currchar == "$") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
+    fNameArr.push(searchFname);
+    searchFname = "";
+    console.log(fNameArr);
+  }
 
-        if (
-          newchar == "^" ||
-          newchar == "-" ||
-          newchar == "~" ||
-          newchar == "@" ||
-          newchar == "#" ||
-          newchar == "$"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij");
-          break;
-        }
+  //lname
+  if (currchar == "$") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns.charAt(j);
 
-        searchLname += newchar;
-        console.log(searchLname);
+      if (
+        newchar == "^" ||
+        newchar == "-" ||
+        newchar == "~" ||
+        newchar == "@" ||
+        newchar == "#" ||
+        newchar == "$"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij");
+        break;
       }
-    }
 
-    //mobile
-    if (currchar == "~") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
-
-        if (
-          newchar == "^" ||
-          newchar == "-" ||
-          newchar == "$" ||
-          newchar == "@" ||
-          newchar == "#" ||
-          newchar == "~"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij");
-          break;
-        }
-
-        searchMoblie += newchar;
-      }
-    }
-
-    //city
-    if (currchar == "-") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
-
-        if (
-          newchar == "^" ||
-          newchar == "$" ||
-          newchar == "~" ||
-          newchar == "@" ||
-          newchar == "#" ||
-          newchar == "-"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij");
-          break;
-        }
-
-        searchCity += newchar;
-      }
-    }
-
-    //gender
-    if (currchar == "@") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
-
-        if (
-          newchar == "^" ||
-          newchar == "$" ||
-          newchar == "~" ||
-          newchar == "-" ||
-          newchar == "#" ||
-          newchar == "@"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij");
-          break;
-        }
-
-        searchGender += newchar;
-      }
-    }
-
-    //email
-    if (currchar == "#") {
-      for (let j = i + 1; j < arrAns.length; j++) {
-        let newchar = arrAns.charAt(j);
-
-        if (
-          newchar == "^" ||
-          newchar == "$" ||
-          newchar == "~" ||
-          newchar == "-" ||
-          newchar == "@" ||
-          newchar == "#"
-        ) {
-          i = j - 1;
-          currchar = newchar;
-          console.log(i + " " + j + "ij");
-          break;
-        }
-
-        searchEmail += newchar;
-      }
+      searchLname += newchar;
+      console.log(searchLname);
     }
   }
+
+  //mobile
+  if (currchar == "~") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns.charAt(j);
+
+      if (
+        newchar == "^" ||
+        newchar == "-" ||
+        newchar == "$" ||
+        newchar == "@" ||
+        newchar == "#" ||
+        newchar == "~"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij");
+        break;
+      }
+
+      searchMoblie += newchar;
+    }
+  }
+
+  //city
+  if (currchar == "-") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns.charAt(j);
+
+      if (
+        newchar == "^" ||
+        newchar == "$" ||
+        newchar == "~" ||
+        newchar == "@" ||
+        newchar == "#" ||
+        newchar == "-"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij");
+        break;
+      }
+
+      searchCity += newchar;
+    }
+  }
+
+  //gender
+  if (currchar == "@") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns.charAt(j);
+
+      if (
+        newchar == "^" ||
+        newchar == "$" ||
+        newchar == "~" ||
+        newchar == "-" ||
+        newchar == "#" ||
+        newchar == "@"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij");
+        break;
+      }
+
+      searchGender += newchar;
+    }
+  }
+
+  //email
+  if (currchar == "#") {
+    for (let j = i + 1; j < arrAns.length; j++) {
+      let newchar = arrAns.charAt(j);
+
+      if (
+        newchar == "^" ||
+        newchar == "$" ||
+        newchar == "~" ||
+        newchar == "-" ||
+        newchar == "@" ||
+        newchar == "#"
+      ) {
+        i = j - 1;
+        currchar = newchar;
+        console.log(i + " " + j + "ij");
+        break;
+      }
+
+      searchEmail += newchar;
+    }
+  }
+  // }
 
   // if (searchFname.length =="") {
   //   searchFname = null;

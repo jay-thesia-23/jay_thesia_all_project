@@ -17,215 +17,229 @@ jayCells.forEach((jayCurrCell) => {
   jayCurrCell.addEventListener("click", function () {
     // console.log("You selected: "+ jayCurrCell.closest('tr').rowIndex +"     "+ "you selected this col: "+ jayCurrCell.cellIndex);
 
+    if(jayFlag){
+      this.innerHTML = "O"
+      this.style.color = "green"
+      turn2();
+    }else{
+      
+      this.innerHTML = "X"
+      this.style.color = "red"
+      turn1();
+    }
+
+    jayFlag=!jayFlag
+    winner();
+    
     //cell 1
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jayOne.innerHTML = "O";
-      jayFlag = 1;
-      jayOne.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jayOne.innerHTML = "X";
-      jayFlag = 0;
-      jayOne.style.color = "red";
-      turn1();
-      winner();
-    }
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jayOne.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayOne.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jayOne.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayOne.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 2
+    // //cell 2
 
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayTwo.innerHTML = "O";
-      jayFlag = 1;
-      jayTwo.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayTwo.innerHTML = "X";
-      jayFlag = 0;
-      jayTwo.style.color = "red";
-      turn1();
-      winner();
-    }
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayTwo.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayTwo.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayTwo.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayTwo.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 3
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jayThree.innerHTML = "O";
-      jayFlag = 1;
-      jayThree.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 0 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jayThree.innerHTML = "X";
-      jayFlag = 0;
-      jayThree.style.color = "red";
-      turn1();
-      winner();
-    }
+    // //cell 3
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jayThree.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayThree.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 0 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jayThree.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayThree.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 4
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jayFour.innerHTML = "O";
-      jayFlag = 1;
-      jayFour.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jayFour.innerHTML = "X";
-      jayFlag = 0;
-      jayFour.style.color = "red";
-      turn1();
-      winner();
-    }
+    // //cell 4
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jayFour.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayFour.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jayFour.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayFour.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 5
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayFive.innerHTML = "O";
-      jayFlag = 1;
-      jayFive.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayFive.innerHTML = "X";
-      jayFlag = 0;
-      jayFive.style.color = "red";
-      turn1();
-      winner();
-    }
+    // //cell 5
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayFive.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayFive.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayFive.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayFive.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 6
+    // //cell 6
 
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jaySix.innerHTML = "O";
-      jayFlag = 1;
-      jaySix.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 1 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jaySix.innerHTML = "X";
-      jayFlag = 0;
-      jaySix.style.color = "red";
-      turn1();
-      winner();
-    }
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jaySix.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jaySix.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 1 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jaySix.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jaySix.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 7
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jaySeven.innerHTML = "O";
-      jayFlag = 1;
-      jaySeven.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 0
-    ) {
-      jaySeven.innerHTML = "X";
-      jayFlag = 0;
-      jaySeven.style.color = "red";
-      turn1();
-      winner();
-    }
+    // //cell 7
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jaySeven.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jaySeven.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 0
+    // ) {
+    //   jaySeven.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jaySeven.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell 8
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayEight.innerHTML = "O";
-      jayFlag = 1;
-      jayEight.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 1
-    ) {
-      jayEight.innerHTML = "X";
-      jayFlag = 0;
-      jayEight.style.color = "red";
-      turn1();
-      winner();
-    }
+    // //cell 8
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayEight.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayEight.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 1
+    // ) {
+    //   jayEight.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayEight.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
 
-    //cell9
+    // //cell9
 
-    if (
-      jayFlag == 0 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jayNine.innerHTML = "O";
-      jayFlag = 1;
-      jayNine.style.color = "green";
-      turn2();
-      winner();
-    } else if (
-      jayFlag == 1 &&
-      jayCurrCell.closest("tr").rowIndex == 2 &&
-      jayCurrCell.cellIndex == 2
-    ) {
-      jayNine.innerHTML = "X";
-      jayFlag = 0;
-      jayNine.style.color = "red";
-      turn1();
-      winner();
-    }
+    // if (
+    //   jayFlag == 0 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jayNine.innerHTML = "O";
+    //   jayFlag = 1;
+    //   jayNine.style.color = "green";
+    //   turn2();
+    //   winner();
+    // } else if (
+    //   jayFlag == 1 &&
+    //   jayCurrCell.closest("tr").rowIndex == 2 &&
+    //   jayCurrCell.cellIndex == 2
+    // ) {
+    //   jayNine.innerHTML = "X";
+    //   jayFlag = 0;
+    //   jayNine.style.color = "red";
+    //   turn1();
+    //   winner();
+    // }
   });
 });
 

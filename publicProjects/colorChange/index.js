@@ -40,26 +40,43 @@ function increase() {
 var seconds = 10;
 var timer;
 
-//countdown clock for game
+// //countdown clock for game
 function countdown() {
+  // var seconds = 10;
+  // function tick() {
+  //   var counter = document.getElementById("counter");
+  //   seconds--;
+  //   counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+  //   if (seconds > 0) {
+  //     setTimeout(tick, 1000);
+  //   } else {
+  //     location.reload()
+  //     alert(`Game over your score is ${jayRows}`);
+      
+  //   }
+  // }
+  // tick();
+
   var seconds = 10;
-  function tick() {
+
+  setInterval(() => {
+    
     var counter = document.getElementById("counter");
     seconds--;
-    counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
-    if (seconds > 0) {
-      setTimeout(tick, 1000);
-    } else {
-      location.reload()
-      alert(`Game over your score is ${jayRows}`);
-      
+    counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + seconds;
+  
+    if(seconds <= 0){
+        clearInterval()
     }
-  }
-  tick();
+  
+  }, 1000);
 }
 countdown();
 
-document.getElementById("timer").innerHTML = "1:00";
+
+
+
+// document.getElementByClass("timer").innerHTML = "1:00";
 
 
 //generate the random color and convert it to the hexa decimal
@@ -86,7 +103,7 @@ function ranCell(size) {
   cell.onclick = function () {
     jayCols++;
     jayRows++;
-    increase();
+    increase(); 
   };
 }
 

@@ -7,12 +7,11 @@ import bodyParser from "body-parser";
 
 const app = express();
 
-
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 var PORT = 5000;
 app.set("view engine", "ejs");
-app.use(express.json());
 
 //db connection
 var connection = mysql2.createConnection({
@@ -37,7 +36,6 @@ app.get("/show", authentication, function (req, res) {
 
   let resu2;
 
-
   let search = req.query.search || " ";
 
   connection.query(
@@ -53,9 +51,10 @@ app.get("/show", authentication, function (req, res) {
     function (err, count_arr) {
       let total_page = Math.ceil(count_arr[0].countTot / limit);
 
-      console.log(order,"orderrrrr111111");
+      console.log(order, "orderrrrr111111");
       if (order == "asc") {
-        console.log(order,"orderrrrr");0
+        console.log(order, "orderrrrr");
+        0;
         prev_order = "desc";
       } else {
         prev_order = "asc";
@@ -74,6 +73,40 @@ app.get("/show", authentication, function (req, res) {
   );
 });
 
+app.post("/next", (req, res) => {
+  console.log(req.body);
+
+  let idstarting = Number(req.body.idstarting) || 1;
+  let idending=Number(req.body.idending) || 10
+
+
+  if (idending<=1500) {
+    idstarting=idstarting+10
+    idending=idending+10
+    res.json({"start":`${idstarting}`,"end":`${idending}`});
+  }else{
+    console.log("can't go next");
+  }
+
+});
+
+app.post("/prev", (req, res) => {
+  console.log(req.body);
+
+  let idstarting = Number(req.body.idstarting) || 1;
+  let idending=Number(req.body.idending) || 10
+
+
+  if (idending>10) {
+    idstarting=idstarting+10
+    idending=idending+10
+    res.json({"start":`${idstarting}`,"end":`${idending}`});
+  }else{
+    console.log("can't go previous");
+  }
+
+
+});
 // app.listen(PORT, function (err) {
 //   if (err) console.log("Error in server setup");
 //   console.log("Server listening on Port", PORT);

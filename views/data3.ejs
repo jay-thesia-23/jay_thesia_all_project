@@ -78,7 +78,6 @@
   <body>
     <h1 style="text-align: center">Student Express</h1>
     <div id="main" style="text-align: center; margin-left: 0px">
- 
       <table align="center">
         <tr>
           <th>
@@ -102,11 +101,15 @@
             >
           </th>
           <th>
-            <a href="/show?id=1&&col_name=Email&&order=<%=prev_order%>" id="email"
+            <a
+              href="/show?id=1&&col_name=Email&&order=<%=prev_order%>"
+              id="email"
               >Email</a
             >
           </th>
-          <th><a href="/show?id=1&&col_name=city&&order=<%=prev_order%>">City</a></th>
+          <th>
+            <a href="/show?id=1&&col_name=city&&order=<%=prev_order%>">City</a>
+          </th>
           <th>
             <a href="/show?id=1&&col_name=collegeName&&order=<%=prev_order%>"
               >College</a
@@ -135,7 +138,11 @@
     </div>
 
     <div class="pagination">
-      <%for(let i=1;i<=count_arr;i++){ %>
+      <a href="#" onclick="prevBtn()">Previous</a>
+
+      <div class="button"></div>
+
+      <%for(let i=1;i<=10;i++){ %>
       <a
         href="/show?id=<%=i %>&col_name=<%=col_name%>&order=<%=order%>"
         class="<%= i==page ? 'noActive' : 'activeLink' %>"
@@ -144,6 +151,66 @@
       >
 
       <% }%>
+
+      <a href="#" onclick="nextBtn()">Next</a>
     </div>
+
+    <script>
+      function prevBtn() {
+        fetch("/prev", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idstarting: 0,
+            idending: 10,
+          }),
+        })
+          .then((res) => {
+            console.log(res);
+            return res.json();
+          })
+          .then((res) => {
+            console.log(res, "res of json");
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
+
+      function nextBtn() {
+        fetch("/next", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idstarting: 0,
+            idending: 10,
+          }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            console.log(res.end, "res of json");
+
+            for (let i = res.start; i <= res.end; i++) {
+              <a
+                href="/show?id=`${i}`"
+                class="<%= i==page ? 'noActive' : 'activeLink' %>"
+              >
+                i
+              </a>;
+            }
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      }
+    </script>
   </body>
 </html>

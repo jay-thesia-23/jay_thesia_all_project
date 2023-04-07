@@ -11,7 +11,7 @@ import { authentication } from "./autheticate/auth.js";
 var app = express();
 var __dirname = path.resolve();
 
-console.log(__dirname);
+
 
 console.log(path.join(__dirname, "public", "tic_tac_toe"));
 
@@ -46,22 +46,22 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  console.log("heoroine");
-  console.log(req.body);
+
+
 
   var name = req.body.name || "";
   var email = req.body.email || "";
   var password = req.body.password || "";
   var con_password = req.body.con_password || "";
 
-  console.log(password + " password");
+
   let sqlEmail = `select email from users;`;
 
   try {
     var emailArr = [];
 
     if (name != "" && password != "" && con_password != "" && email != "") {
-      console.log("herjhe");
+  
       connection.query(sqlEmail, (err, data) => {
         emailArr = data.map((item) => item.email);
 
@@ -75,7 +75,7 @@ app.post("/register", async (req, res) => {
       });
 
       async function checkEmail(isEmail) {
-        console.log(isEmail + "isemail");
+
         if (isEmail == false) {
           const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -91,8 +91,7 @@ app.post("/register", async (req, res) => {
           res.cookie("access_token", token);
 
           connection.query(insert, (err, data) => {
-            console.log("data is inserted");
-            console.log(insert);
+         
           });
 
           res.redirect("/activationLink");
@@ -111,7 +110,7 @@ app.post("/register", async (req, res) => {
         }
       }
     } else {
-      console.log("js email side");
+
       connection.query(sqlEmail, (err, data) => {
         if (err) throw err;
         emailArr = data.map((item) => item.email);
@@ -149,7 +148,7 @@ app.post("/login", async (req, res) => {
         });
       }
 
-      console.log(dataUser);
+
       if (dataUser.length == 0) {
         return res.status(401).send({
           msg: "email or password is incorrect!",
@@ -174,18 +173,18 @@ app.post("/login", async (req, res) => {
           expiresIn: "1d",
         });
 
-        console.log(token);
+   
 
         res.cookie("access_token", token, {
           httpOnly: true,
         });
 
         const accessToken = req.cookies.access_token;
-        console.log(accessToken);
+     
 
         jwt.verify(accessToken, "abcdedf123456", function (err, decoded) {
           getname = dataUser[0].name;
-          console.log(getname, "getName");
+
 
           res.redirect("/home");
         });
@@ -205,7 +204,7 @@ app.get("/home", (req, res) => {
   console.log(req.cookies.access_token, "cokkies chhe bhai");
 
   if (req.cookies.access_token != undefined && getname != undefined) {
-    console.log(getname, "getname");
+
     res.render("home", { getname });
   } else {
     res.redirect("login");
@@ -213,7 +212,7 @@ app.get("/home", (req, res) => {
 });
 
 app.post("/home", (req, res) => {
-  console.log(req.body);
+ 
 
   if (req.body.logout == "LOGOUT") {
     res.clearCookie("access_token");
@@ -226,14 +225,12 @@ app.get("/activationLink", async (req, res) => {
   var tokenActiveLink = req.cookies.access_token;
 
   jwt.verify(tokenActiveLink, "abcdedf123456", (err, payload) => {
-    console.log(payload.email);
+
 
     let checkActive = `select * from users where email="${payload.email}" and isActivated=1;`;
 
     connection.query(checkActive, (err, data) => {
-      console.log(checkActive);
-      console.log(data, "data in activation");
-      console.log(data.length, "data length");
+
 
       // if (data.length == 0) {
       //   res.redirect("/login");
@@ -248,15 +245,14 @@ app.get("/activationLink", async (req, res) => {
 });
 
 app.post("/activationLink", (req, res) => {
-  console.log(req.body, "body link");
+
 
   let link = req.body.linkactive;
   let accessToken = req.cookies.access_token;
 
-  console.log(accessToken);
+
 
   jwt.verify(accessToken, "abcdedf123456", function (err, decoded) {
-    console.log(decoded);
 
     // res.render("home", { getname });
     console.log(decoded.email);

@@ -10,6 +10,8 @@ function increase() {
   table.innerHTML = "";
   let tbl = document.createElement("table");
 
+  console.log(tbl,"tbl in create elmetn");
+
   for (let i = 0; i < jayRows; i++) {
     let row = document.createElement("tr");
 
@@ -19,13 +21,13 @@ function increase() {
       cell.setAttribute("border-collapse", "collapse");
       cell.id = "cell_" + (i * jayRows + j);
 
-      row.appendChild(cell);
+      // row.appendChild(cell);
     }
 
-    tbl.appendChild(row);
+    // tbl.appendChild(row);
   }
 
-  table.appendChild(tbl);
+  // table.appendChild(tbl);
   tbl.style.backgroundColor = generateRandomColor();
 
   ranCell(jayRows * jayCols);

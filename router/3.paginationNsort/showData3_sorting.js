@@ -3,7 +3,12 @@
 import mysql2 from "mysql2";
 import express from "express";
 import { authentication } from "../../autheticate/auth.js";
+import bodyParser from "body-parser";
+
 const app = express();
+
+
+app.use(bodyParser.urlencoded({extended:true}))
 
 var PORT = 5000;
 app.set("view engine", "ejs");

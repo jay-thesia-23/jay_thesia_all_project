@@ -117,6 +117,7 @@
             class="btn btn-danger"
             id="<%=data[i].candidate_id%>"
             onclick="check(this.id)"
+            href="/save"
             >
             Save
         </a>
@@ -151,11 +152,10 @@
 
     
         <td>
-          <a class="btn btn-danger" id="" onclick="check(id)">
+          <a class="btn btn-danger" id="" onclick="check(id)" href="/save">
             Save
         </a>
         </td>
-      
       `
       check(id);
 
@@ -164,7 +164,7 @@
     }
 
     function check(id){
-        console.log("check")
+        console.log(id)
        
         let fname=document.getElementsByName("fname");
         let lname=document.getElementsByName("lname");
@@ -179,7 +179,7 @@
         let emailArray=[];
         let cityArray=[];
 
-      console.log(id);
+      console.log(id,"iddfdjdfjisfifj");
       for(let i=0;i<fname.length;i++){
  
         fnameArray.push(fname[i].value)
@@ -215,6 +215,7 @@
       .then((res)=>res.json())
       .then((res)=>{
         // console.log(res);
+        location.href="http://localhost:5001/save"
       })
 
       location.href="http://localhost:5001/save"

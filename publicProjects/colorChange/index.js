@@ -37,12 +37,12 @@ function increase() {
 
 
 
-var seconds = 60;
+var seconds = 10;
 var timer;
 
 //countdown clock for game
 function countdown() {
-  var seconds = 59;
+  var seconds = 10;
   function tick() {
     var counter = document.getElementById("counter");
     seconds--;
@@ -50,7 +50,9 @@ function countdown() {
     if (seconds > 0) {
       setTimeout(tick, 1000);
     } else {
+      location.reload()
       alert(`Game over your score is ${jayRows}`);
+      
     }
   }
   tick();
@@ -62,7 +64,8 @@ document.getElementById("timer").innerHTML = "1:00";
 
 //generate the random color and convert it to the hexa decimal
 function generateRandomColor() {
-  var randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16); // -> #e1ac94
+  var randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  // -> #e1ac94
   return randomColor;
 }
 

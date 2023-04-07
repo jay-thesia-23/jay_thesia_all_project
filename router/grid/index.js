@@ -24,6 +24,7 @@ app.get("/save",authentication, (req, res) => {
 
   connection.query(sql, (err, data) => {
     console.log(data);
+    
     res.render("save", { data });
   });
 });
@@ -31,6 +32,7 @@ app.get("/save",authentication, (req, res) => {
 app.get("/edit1",authentication, (req, res) => {
   var sql = `select * from candidate_basic_info;`;
   connection.query(sql, (err, data) => {
+   
     res.render("update", { data });
   });
 });
@@ -47,6 +49,8 @@ app.post("/edit", (req, res) => {
       console.log(data);
 
       let total = data2[0].total;
+
+    
       let id = req.body.id;
       let fname = req.body.arrFname;
       let lname = req.body.arrLname;

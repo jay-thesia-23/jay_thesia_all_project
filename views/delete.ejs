@@ -95,24 +95,9 @@
   <body>
     <div id="loder"></div>
 
-    <form action="">
-      <input
-        type="text"
-        placeholder="Search here..."
-        id="search"
-        name="search"
-      />
-      <input type="submit" value="Search" id="search" />
-      <input type="reset" value="clear" id="clear" />
-    </form>
+   
 
-    <div id="delimeters">
-      <label>^ = firstName</label>
-      <lable>$ = Lastname</lable>
-      <lable>- = City</lable>
-      <lable>~ = MobileNo</lable>
-      <lable>@ = Gender</lable>
-    </div>
+   
 
     <span
       style="cursor: pointer; background-color: red"
@@ -165,10 +150,10 @@
 
           <td>
             <a
-              href="/edit?id=<%=q1.candidate_id%>"
+              href="/editform?id=<%=q1.candidate_id%>"
               class="btn btn-success"
               id="<%=q1.candidate_id%>"
-              onclick="editIt(this.id,`/edit?id=${this.id}`)"
+              onclick="editIt(this.id,`/editform?id=${this.id}`)"
             >
               Update
             </a>
@@ -316,7 +301,7 @@
         </td>
         <td>
             <a
-              href="/edit?id=${data[i].candidate_id}"
+              href="/editform?id=${data[i].candidate_id}"
               class="btn btn-success"
               id="${data[i].candidate_id}"
      

@@ -104,11 +104,9 @@
 
         <td>
           <a
-            href="/edit1?id="
+            href="/edit1"
             class="btn btn-warning"
-            id="<%=data[i].candidate_id%>"
-          
-          >
+            id="<%=data[i].candidate_id%>">
             Update
           </a>
         </td>
@@ -125,7 +123,7 @@
 
 
 
-function check(id){
+    function check(id){
         console.log("check")
       
         let fname=document.getElementsByName("fname");
@@ -160,7 +158,6 @@ function check(id){
       'Content-Type': 'application/json'
         },
         body:JSON.stringify({
-            
             "currID":id,
             "arrFname":fnameArray,
             "arrLname":lnameArray,
@@ -176,7 +173,7 @@ function check(id){
 
      
      
-    }
+  }
 
 
     </script>

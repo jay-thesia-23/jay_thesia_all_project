@@ -16,7 +16,7 @@ var connection = mysql2.createConnection({
   database: "job_portal",
 });
 
-app.get("/",authentication, (req, res) => {
+app.get("/", authentication, (req, res) => {
   connection.connect();
 
   let state = req.query.state;
@@ -141,6 +141,7 @@ app.post("/form", async function (req, res) {
       if (error) throw error;
 
       resolve(data.insertId);
+
       res.send("data added successfully");
       insertedId = data.insertId;
       console.log(data);
@@ -160,7 +161,7 @@ app.post("/form", async function (req, res) {
       });
     }
   } else {
-    let insertEdu = `SELECT  state_name FROM state_masteredu_level,percentage,board_unverisy_name,starting_year,ending_year) VALUES ("${insertedId}","${course}","${percentage}","${university}","${yearStart}","${yearEnd}");`;
+    let insertEdu = `INSERT INTO education_table(candidate_id,edu_level,percentage,board_unverisy_name,starting_year,ending_year) VALUES ("${insertedId}","${course}","${percentage}","${university}","${yearStart}","${yearEnd}");`;
 
     connection.query(insertEdu, (error, data) => {
       if (error) throw error;
@@ -192,19 +193,25 @@ app.post("/form", async function (req, res) {
 
   //tech
 
+  if (techname == undefined) {
+    techname = [];
+  }
+
   if (Array.isArray(techname)) {
     for (let i = 0; i < techname.length; i++) {
-      var techProficiency = eval("req.body." + techname[i]);
+      if (techname[i] == undefined) {
+        var techProficiency = eval("req.body." + techname[i]);
 
-      let insertTech = `INSERT INTO technologies_table (candidate_id, tech_name, tech_proficiency) VALUES ("${insertedId}","${techname[i]}","${techProficiency}");`;
+        let insertTech = `INSERT INTO technologies_table (candidate_id, tech_name, tech_proficiency) VALUES ("${insertedId}","${techname[i]}","${techProficiency}");`;
 
-      console.log(insertTech);
-      connection.query(insertTech, function (error, data) {
-        if (error) throw error;
-        // res.send("tech is added succesfully")
-      });
+        console.log(insertTech);
+        connection.query(insertTech, function (error, data) {
+          if (error) throw error;
+        });
+      }
     }
   } else {
+    console.log(techname, "technnnnnnnnnnnnnnnnnnnnnname");
     var techProficiency = eval("req.body." + techname);
 
     console.log(techname);
@@ -219,6 +226,9 @@ app.post("/form", async function (req, res) {
   //lang
 
   // console.log(lang);
+  if (lang == undefined) {
+    lang = [];
+  }
 
   if (typeof lang == "object") {
     for (let i = 0; i < lang.length; i++) {
@@ -247,6 +257,7 @@ app.post("/form", async function (req, res) {
       currSpeak = "no";
     }
 
+    let insertLang = `INSERT INTO language_known(candidate_id,language_name, lang_read, lang_write, lang_speak) VALUES ("${insertedId}","${lang}","${currRead}","${currWrite}","${currSpeak}");`;
     connection.query(insertLang, function (err, data) {
       if (err) throw err;
     });
@@ -279,7 +290,7 @@ app.post("/form", async function (req, res) {
 });
 
 //city end point
-app.get("/getCity",authentication, async (req, res) => {
+app.get("/getCity", authentication, async (req, res) => {
   connection.connect();
 
   let state = req.query.state;
@@ -299,7 +310,7 @@ app.get("/getCity",authentication, async (req, res) => {
   });
 });
 
-app.get("/searchform",authentication, (req, res) => {
+app.get("/searchform", authentication, (req, res) => {
   connection.connect();
 
   let id = req.query.id || 1;
@@ -327,10 +338,12 @@ app.get("/searchform",authentication, (req, res) => {
   let gender = [];
   let city = [];
 
-  console.log(arrAns);
+  console.log(arrAns, "answer ans arr");
 
   for (let i = 0; i < arrAns.length; i++) {
     let currchar = arrAns[i][0];
+
+    console.log(currchar, "ansswer");
 
     //fname
     if (currchar == "^") {
@@ -356,7 +369,6 @@ app.get("/searchform",authentication, (req, res) => {
 
       fNameArr.push(searchFname);
       searchFname = "";
-      console.log(searchFname);
       console.log(fNameArr);
     }
 
@@ -578,7 +590,7 @@ app.get("/searchform",authentication, (req, res) => {
 });
 
 //delete the records
-app.get("/delete",authentication, (req, res) => {
+app.get("/delete", authentication, (req, res) => {
   connection.connect();
 
   let id = req.query.id;
@@ -608,8 +620,6 @@ app.get("/delete",authentication, (req, res) => {
   let mobileArr = [];
   let gender = [];
   let city = [];
-
-  // console.log(arrAns);
 
   for (let i = 0; i < arrAns.length; i++) {
     let currchar = arrAns[i][0];
@@ -771,48 +781,41 @@ app.get("/delete",authentication, (req, res) => {
     sqlfname = `firstname LIKE '%${searchFname}%'`;
   }
 
-  var im = "Loading_icon.gif";
-  var up = `UPDATE candidate_basic_info SET isDeleted=1 WHERE candidate_id=${id} `;
-  let finalsql = `select * from candidate_basic_info where ${sqlfname} AND lastname LIKE '%${searchLname}%' AND city LIKE '%${searchCity}%' AND phone_number LIKE '%${searchMoblie}%' AND gender LIKE '%${searchGender}%' AND email LIKE '%${searchEmail}%' AND isDeleted=0;`;
-  let sqlLimit = `select * from candidate_basic_info where isDeleted=0 limit ${offset},${limit};`;
+  console.log();
 
-  console.log(up);
-  console.log(finalsql);
+  let sqlLimit = `select * from candidate_basic_info where isDeleted=0 limit ${offset},${limit};`;
   console.log(sqlLimit);
 
-  connection.query(up, (err, data) => {
-    connection.query(finalsql, function (err, resu) {
-      connection.query(sqlLimit, (err, data2) => {
-        connection.query(
-          `select count(*) as countTotal from candidate_basic_info ;`,
-          function (err, count_arr) {
-            if (sort == "asc") {
-              sort = "desc";
-            } else {
-              sort = "asc";
-            }
+  connection.query(sqlLimit, (err, data2) => {
+    console.log(data2, "saqlimmitttttt");
+    connection.query(
+      `select count(*) as countTotal from candidate_basic_info ;`,
+      function (err, count_arr) {
+        if (sort == "asc") {
+          sort = "desc";
+        } else {
+          sort = "asc";
+        }
 
-            let total_page = Math.ceil(count_arr[0].countTotal / limit);
+        let total_page = Math.ceil(count_arr[0].countTotal / limit);
 
-            if (ajax == false) {
-              res.render("delete", {
-                data2,
-                count_arr: total_page,
-                page: id,
-                col_name,
-                sort,
-              });
-            } else {
-              res.json(data2);
-            }
-          }
-        );
-      });
-    });
+        if (ajax == false) {
+          res.render("delete", {
+            data2,
+            count_arr: total_page,
+            page: id,
+            col_name,
+            sort,
+          });
+        } else {
+          res.json(data2);
+        }
+      }
+    );
   });
 });
 
-app.get("/deleteAll",authentication, (req, res) => {
+app.get("/deleteAll", authentication, (req, res) => {
   connection.connect();
 
   let idArr = req.query.idArr;
@@ -825,7 +828,7 @@ app.get("/deleteAll",authentication, (req, res) => {
 
 //edit
 
-app.get("/editForm",authentication, (req, res) => {
+app.get("/editform", authentication, (req, res) => {
   connection.connect();
 
   let id = req.query.id;
@@ -863,6 +866,7 @@ app.get("/editForm",authentication, (req, res) => {
     pre = data;
 
     loc_arr = pre[0].prefered_location.split(",");
+    // loc_arr="ahme"
     console.log(loc_arr);
   });
 
@@ -889,7 +893,6 @@ app.get("/editForm",authentication, (req, res) => {
 
   connection.query(getEdu, (err, data3) => {
     if (err) throw err;
-
     edu = data3;
   });
   connection.query(getState, (err, data2) => {
@@ -939,7 +942,7 @@ app.get("/editForm",authentication, (req, res) => {
   });
 });
 
-app.post("/updated",authentication, (req, res) => {
+app.post("/updated", authentication, (req, res) => {
   let id2 = req.body.candidate;
 
   console.log(id2);
@@ -1066,9 +1069,9 @@ app.post("/updated",authentication, (req, res) => {
 
     let updateLang = `update language_known set language_name="${lang}", lang_read="${currRead}", lang_write="${currWrite}", lang_speak="${currSpeak}" where lang_id="${lang_id}" ;`;
 
-    // connection.query(updateLang, function (err, data) {
-    //   if (err) throw err;
-    // });
+    connection.query(updateLang, function (err, data) {
+      if (err) throw err;
+    });
 
     console.log(updateLang);
   }
@@ -1090,7 +1093,7 @@ app.post("/updated",authentication, (req, res) => {
       console.log(updateTech);
     }
   } else {
-    var techProficiency = eval("req.body." + techname[i]);
+    var techProficiency = eval("req.body." + techname);
 
     console.log(techProficiency);
 
@@ -1098,17 +1101,16 @@ app.post("/updated",authentication, (req, res) => {
   set tech_name="${techname}", tech_proficiency="${techProficiency}"
   where tech_id=${tech_id} `;
 
-    // connection.query(updateTech, (err, data) => {
-    //   console.log(data + "addeed tech");
-    // });
+    connection.query(updateTech, (err, data) => {
+      console.log(data + "addeed tech");
+    });
 
     console.log(updateTech);
   }
 
   if (typeof course == "object") {
-  
-      for (let i = 0; i < course.length; i++) {
-        if (edu_id[i] != "undefined") {
+    for (let i = 0; i < course.length; i++) {
+      if (edu_id[i] != "undefined") {
         let updateEdu = `update education_table
     set edu_level="${course[i]}", percentage="${percentage[i]}", 
     board_unverisy_name="${university[i]}", starting_year="${yearStart[i]}", ending_year="${yearEnd[i]}" where edu_id="${edu_id[i]}";
@@ -1118,10 +1120,8 @@ app.post("/updated",authentication, (req, res) => {
         //   console.log("edu update");
         // });
         console.log(updateEdu);
-      }
-
-      else{
-          let updateEdu=``
+      } else {
+        let updateEdu = ``;
       }
     }
   } else {
@@ -1130,9 +1130,9 @@ app.post("/updated",authentication, (req, res) => {
     board_unverisy_name="${university}", starting_year="${yearStart}", ending_year="${yearEnd}" where edu_id="${edu_id}";
     `;
 
-    // connection.query(updateEdu, (err, data2) => {
-    //   console.log("edu update");
-    // });
+    connection.query(updateEdu, (err, data2) => {
+      console.log("edu update");
+    });
     console.log(updateEdu);
   }
 
@@ -1154,16 +1154,16 @@ app.post("/updated",authentication, (req, res) => {
      where exp_id=${exp_id};
     `;
 
-    // connection.query(updateCompany, (err, data2) => {
-    //   console.log("edu update");
-    // });
+    connection.query(updateCompany, (err, data2) => {
+      console.log("edu update");
+    });
     console.log(updateCompany);
   }
 
-  // connection.query(updated, (err, data) => {
-  //   if (err) throw err;
-  //   console.log("data is updated");
-  // });
+  connection.query(updated, (err, data) => {
+    if (err) throw err;
+    console.log("data is updated");
+  });
 
   console.log(updated);
 
@@ -1174,4 +1174,4 @@ app.post("/updated",authentication, (req, res) => {
 //   console.log("server is running");
 // });
 
-export default app
+export default app;

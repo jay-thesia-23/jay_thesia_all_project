@@ -593,7 +593,7 @@ app.get("/searchform", authentication, (req, res) => {
 });
 
 //delete the records
-app.get("/delete", authentication, (req, res) => {
+app.get("/deleteform", authentication, (req, res) => {
   connection.connect();
 
   let id = req.query.id;
@@ -818,7 +818,7 @@ app.get("/delete", authentication, (req, res) => {
   });
 });
 
-app.get("/deleteAll", authentication, (req, res) => {
+app.get("/deleteallform", authentication, (req, res) => {
   connection.connect();
 
   let idArr = req.query.idArr;

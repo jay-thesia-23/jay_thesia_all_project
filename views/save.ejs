@@ -90,6 +90,8 @@
         <th>MobileNo</th>
         <th>City</th>
         <th>Update</th>
+        
+        <th>Save</th>
     
       </tr>
 
@@ -101,14 +103,29 @@
         <td><%=data[i].email%></td>
         <td><%=data[i].phone_number%></td>
         <td><%=data[i].city%></td>
+        
 
         <td>
           <a
             href="/edit1"
             class="btn btn-warning"
-            id="<%=data[i].candidate_id%>">
+            id="<%=data[i].candidate_id%>"
+            onclick=""
+            >
+            onclick
             Update
           </a>
+        </td>
+
+        <td>
+          <a
+            class="btn btn-danger"
+            id="<%=data[i].candidate_id%>"
+            onclick="check(this.id)"
+            href="/save"
+            >
+            Save
+        </a>
         </td>
         
       </tr>
@@ -121,7 +138,9 @@
 
     <script>
 
+      function editRec(id){
 
+      }
 
     function check(id){
         console.log("check")

@@ -80,7 +80,137 @@
 <body>
   <h1 style="text-align: center">Student Express</h1>
   <div id="main" style="text-align: center; margin-left: 0px">
-    <table align="center">
+
+
+  <!-- <div class="">
+    <input type="text"  name="search" id="search" placeholder="Search here" oninput="search()">
+    <input type="submit">
+  </div> -->
+    
+  </div>
+
+
+  <div id="staticPage">
+  <table align="center" id="staticTable">
+    <tr>
+      <th>
+        <a href="/show?id=1&&col_name=StudentID&&order=<%=prev_order%>">Student ID</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=FirstName&&order=<%=prev_order%>">First Name</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=LastName&&order=<%=prev_order%>">Last Name</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=MobileNo&&order=<%=prev_order%>">MobileNo</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=Email&&order=<%=prev_order%>" id="email">Email</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=city&&order=<%=prev_order%>">City</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=collegeName&&order=<%=prev_order%>">College</a>
+      </th>
+      <th>
+        <a href="/show?id=1&&col_name=birthdate&&order=<%=prev_order%>">birth date</a>
+      </th>
+    </tr>
+
+    <%resu2.forEach(q1=>{%>
+      <tr>
+        <td>
+          <%=q1.StudentID%>
+        </td>
+        <td>
+          <%=q1.FirstName%>
+        </td>
+        <td>
+          <%=q1.LastName%>
+        </td>
+        <td>
+          <%=q1.MobileNo%>
+        </td>
+        <td>
+          <%=q1.Email%>
+        </td>
+        <td>
+          <%=q1.city%>
+        </td>
+        <td>
+          <%=q1.collegeName%>
+        </td>
+        <td><%=q1.birthdate.toJSON('yyyy-mm-dd').slice(0,10)%></td>
+      </tr>
+      <%})%>
+  </table>
+
+
+  <div class="pagination">
+    <a href="/show?id=<%=start%>&start=<%=start%>&end=<%=end%>&prev=yes&order=<%=order%>" " onclick="prevBtn()">Previous</a>
+
+    <div class="button"></div>
+
+    <%let startRec=start%>
+    <%let endRec=end%>
+
+    <%for(let i=start;i<=end;i++){ %>
+
+
+      <a
+        href="/show?id=<%=i %>&start=<%=start%>&end=<%=end%>&col_name=<%=col_name%>&order=<%=order%>"
+        class="<%= i==page ? 'noActive' : 'activeLink' %>"
+      >
+        <%=(i) %></a
+      >
+
+      <% }%>
+
+  
+    <a href="/show?id=<%=start%>&start=<%=start%>&end=<%=end%>&next=yes&order=<%=order%>" onclick="nextBtn()" id="next">Next</a>
+  </div>
+
+  </div>
+
+  <div id="searchDiv"></div>
+  <script>
+  function search(){
+
+    let search=document.getElementById("search").value
+
+    let start="<%-startRec%>"
+    let end="<%-endRec%>"
+
+
+    console.log(start,end,"sjjfdifsj");
+    console.log(search,"thisisss");
+
+    fetch(`/searchrecord?search=${search}`,{
+      method:"POST",
+      headers:{
+        "Content-type":"application/json"      
+      },
+      body:JSON.stringify({
+        "start":start,
+        "end":end
+      })
+    }).then((res)=>res.json())
+    .then((res)=>{
+      console.log(res);
+
+      let staticPage=document.getElementById("staticPage")
+      
+      staticPage.innerHTML=""
+
+      let searchDiv=document.getElementById("searchDiv")
+
+
+      let s;
+
+      for(let i=0;i<res.length;i++){
+        s+=` <table align="center" id="staticTable">
       <tr>
         <th>
           <a href="/show?id=1&&col_name=StudentID&&order=<%=prev_order%>">Student ID</a>
@@ -134,87 +264,13 @@
           <td><%=q1.birthdate.toJSON('yyyy-mm-dd').slice(0,10)%></td>
         </tr>
         <%})%>
-    </table>
-  </div>
+        </table>`
+      }
 
-  <div class="pagination">
-    <a href="/show?id=<%=start%>&start=<%=start%>&end=<%=end%>&prev=yes&order=<%=order%>" " onclick="prevBtn()">Previous</a>
+      
 
-    <div class="button"></div>
-
-    <%for(let i=start;i<=end;i++){ %>
-      <a
-        href="/show?id=<%=i %>&start=<%=start%>&end=<%=end%>&col_name=<%=col_name%>&order=<%=order%>"
-        class="<%= i==page ? 'noActive' : 'activeLink' %>"
-      >
-        <%=(i) %></a
-      >
-
-      <% }%>
-
-  
-    <a href="/show?id=<%=start%>&start=<%=start%>&end=<%=end%>&next=yes&order=<%=order%>" onclick="nextBtn()" id="next">Next</a>
-  </div>
-
-  <script>
-    // function prevBtn() {
-    //   fetch("/prev", {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       idstarting: 0,
-    //       idending: 10,
-    //     }),
-    //   })
-    //     .then((res) => {
-    //       console.log(res);
-    //       return res.json();
-    //     })
-    //     .then((res) => {
-    //       console.log(res, "res of json");
-    //     })
-    //     .catch((res) => {
-    //       console.log(res);
-    //     });
-    // }
-
-    function nextBtn() {
-
-      let btn = document.getElementById("pageButton");
-      let start=Number('<%-start%>')
-      let end=Number('<%-end%>')
-
-      // start+=10;
-      // end+=10
-
-      fetch("/next", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idstarting": start,
-          "idending": end,
-          "clickedNext":"yes"
-        }),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          console.log(res.end, "res of json");
-
-
-         
-        })
-        .catch((res) => {
-          console.log(res);
-        });
-    }
+    })
+  }
   </script>
 </body>
 

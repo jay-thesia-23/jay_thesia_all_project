@@ -1,4 +1,3 @@
-//this file is use for pagination in a table data with sorting
 
 import mysql2 from "mysql2";
 import express from "express";
@@ -63,14 +62,13 @@ app.get("/show", authentication, async function (req, res) {
       end -= 10;
     }
   }
-  console.log(start, end, "start end i js AFTER change");
 
   startingIndex = (id - 1) * limit || 0;
-  console.log(startingIndex, "startin g index of the after");
 
-  let limitSql = `select * from stu_express order by ${col_name} ${order} limit ${startingIndex},${limit};`;
-  let resultLimit = await query(limitSql);
 
+  let limitSql=`select * from stu_express order by ${col_name} ${order} limit ${startingIndex},${limit};`
+  let resultLimit=await query(limitSql)
+ 
 
   if (order == "asc") {
     prev_order = "desc";
@@ -90,38 +88,29 @@ app.get("/show", authentication, async function (req, res) {
   });
 });
 
-// app.post("/next", (req, res) => {
-//   console.log(req.body);
+app.post("/searchrecord",async (req,res)=>{
 
-//   let idstarting = Number(req.body.idstarting) || 1;
-//   let idending = Number(req.body.idending) || 10;
+  
+let searchInput=req.query.search
+let start=req.body.start
+let end=req.body.end
+let limit = 10;
 
-//   if (idending <= 1500) {
-//     idstarting = idstarting + 10;
-//     idending = idending + 10;
-//     res.json({ start: `${idstarting}`, end: `${idending}` });
-//   } else {
-//     console.log("can't go next");
-//   }
-// });
+let id = Number(req.query.id) || 1;
 
-//  app.post("/prev", (req, res) => {
-//    console.log(req.body);
+console.log(id,"id in search");
+let startingIndex = (id - 1) * limit || 0;
 
-//    let idstarting = Number(req.body.idstarting) || 1;
-//    let idending = Number(req.body.idending) || 10;
+let col_name = req.query.col_name || "StudentID";
+let prev_order = "asc";
+let order = req.query.order || "asc";
 
-//    if (idending > 10) {
-//      idstarting = idstarting + 10;
-//      idending = idending + 10;
-//      res.json({ start: `${idstarting}`, end: `${idending}` });
-//    } else {
-//      console.log("can't go previous");
-//    }
-//  });
-// app.listen(PORT, function (err) {
-//   if (err) console.log("Error in server setup");
-//   console.log("Server listening on Port", PORT);
-// });
+let sqlSearch=`select * from stu_express  where firstname like "%${searchInput}%" or lastname like "%${searchInput}%" order by  ${col_name} ${order} limit ${startingIndex},${limit}`
 
+
+let dataSearch=await query(sqlSearch)
+
+
+
+})
 export default app;

@@ -60,7 +60,7 @@
 <% var jay;%>
 
             <tr>
-
+                <td>id</td>
                 <td>fname</td>
                 <td>lname</td>
                 <td>phone Number</td> 
@@ -71,7 +71,7 @@
             </tr>
            <% for(let j=0;j<result.length;j++){%>
             <tr id="del<%= j+1%>">
-                
+                <td><input type="text" id="id<%= j+1%>" value="<%= result[j].candidate_id%>"></td>
                 <td><input type="text" id="fname<%= j+1%>" value="<%= result[j].firstname%>"></td>
                 <td><input type="text" id="lname<%= j+1%>" value="<%= result[j].lastname%>"></td>
                 <td><input type="text" id="phone<%= j+1%>" value="<%= result[j].phone_number%>"></td>
@@ -132,7 +132,7 @@ sanj=s;
 // UPDATE Record 
 
         async function update(id) {
-            // console.log(id)  
+            console.log(id)  
             var idd = document.getElementById(`id${id}`).value;   
             var phone = document.getElementById(`phone${id}`).value;
             var f_name = document.getElementById(`fname${id}`).value;

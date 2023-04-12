@@ -22,6 +22,20 @@
       body {
         background-color: rgb(131, 166, 181);
       }
+
+      .plus{
+         background-color: green;
+         padding: 10px;
+         border-radius: 10px;
+         cursor: pointer;
+      }
+
+      .minus{
+         background-color: red;
+         padding: 10px;
+         border-radius: 10px;
+         cursor: pointer;
+      }
     </style>
     <!-- <link rel="stylesheet" href="/index.css" /> -->
     <title>Candidature Form</title>
@@ -29,6 +43,8 @@
 
   <body>
     <form action="/form" method="POST">
+
+      <div id="mainError" style="color:red"></div>
        <fieldset>
           <table>
              <legend>Basic Details</legend>
@@ -54,7 +70,7 @@
                 <td><label for="">Designation: </label></td>
                 <td><input type="text" name="designation" id="designation" /></td>
                 <td><label for="">Email: </label></td>
-                <td><input type="email" name="email" id="email"/></td>
+                <td><input type="email" name="email" id="email" oninput="return emailCheck()"/></td>
              </tr>
 
              <tr>
@@ -103,7 +119,7 @@
              <tr>
                 <td><label for="">Phone No: </label></td>
                 <td>
-                   <input type="text" name="mobile" id="phone" />
+                   <input type="text" name="mobile" id="phone" oninput="maxlengthMobile()"/>
                 </td>
                 <td><label for="">City: </label></td>
                 <td>
@@ -136,7 +152,7 @@
                    <input type="radio" name="gender" value="other" id="other"/>other
                 </td>
                 <td><label for="">Zip code</label></td>
-                <td><input type="number" name="zip" id="zip"/></td>
+                <td><input type="text" name="zip" id="zip" oninput="maxlengthZip()"/></td>
              </tr>
 
              <tr>
@@ -199,6 +215,8 @@
                 </td>
                 <td><label for="" id="percent">Percentage: </label></td>
                 <td><input type="text" id="percentValue" name="percentage"/></td>
+
+
                 <td><label for="" id="board" name="university">Board/University: </label></td>
                 <td>
                    <select name="university" id="universityValues">
@@ -212,6 +230,8 @@
                 <td><input type="text" id="yearStartValue" name="yearStart" /></td>
                 <td><label for="" id="year">Passing Year: </label></td>
                 <td><input type="text" id="yearEndValue" name="yearEnd" /></td>
+
+                <td><span class="plus" onclick="return addEducation()">+</span></td>
              </tr>
 
              <tr>
@@ -228,6 +248,12 @@
               </div>
 
               <div> 
+               <td>
+               <p id="boardError" style="color:red"></p>
+               </td>
+             </div>
+
+              <div> 
                 <td>
                 <p id="yearStartError" style="color:red"></p>
                 </td>
@@ -240,7 +266,7 @@
               </div>
              </tr>
           </table>
-          <input type="submit" value="Add More Field" onclick="return addEducation()">
+          
        </fieldset>
 
 
@@ -257,6 +283,9 @@
                 <td><label for="">To</label></td>
                 <td><input type="date" name="to"  /></td>
              </tr>
+
+
+             <div id="mainError" style="color:red"></div>
           </table>
           <span onclick="return addExperience()" value="Add Experience" style="background-color: brown;">Add more Experience</span>
        </fieldset>
@@ -373,8 +402,74 @@
 
 
   <script>
+function maxlengthZip(){
+   var zip=document.getElementById("zip")
+   var zipError=document.getElementById("zipError")
+
+   zip.maxLength="6"
+
+   if(zip.value.length>="6"){
+      zipError.innerText="Max length of the zip is 6 only "
+      return false;
+   }else{
+      zipError.innerText=""
+     
+   }
+
+   return true;
+
+}
+
+function maxlengthMobile(){
+   var phone=document.getElementById("phone")
+   var phoneError=document.getElementById("phoneError")
+
+   phone.maxLength="11"
+
+   if(phone.value.length>="11"){
+      phoneError.innerText="Max length of the Phone number is 10 only "
+      return false;
+   }else{
+      phoneError.innerText=""
+      return true
+   }
+
+   return true
+
+}
+
+let regexEmail=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+function emailCheck(){
+
+   let email=document.getElementById("email").value;
+console.log("hello");
+if(!email.match(regexEmail)){
+document.getElementById("emailError").innerText="no valid Email"
+return false;
+}else{
+   document.getElementById("emailError").innerText=""
+
+}
+}
+
 
 function validation(){
+
+   let tds=document.querySelectorAll("input[type=text]")
+
+console.log(tds,"tdddssss");
+
+   tds.forEach(element => {
+      console.log(element);
+   if(element.value==""){
+      document.getElementById("mainError").innerText="Please fill the fields"
+      return false;
+   }
+});
+
+  
+  
+
   let fname=document.getElementById("fname").value;
   let lname=document.getElementById("lname").value;
 
@@ -395,9 +490,17 @@ function validation(){
   let relationship=document.getElementById("relationship").value
   let date=document.getElementById("date").value
 
+  let course=document.getElementById("courseValues").value
+  let percent=document.getElementById("percentValue").value
+  let board=document.getElementById("universityValues").value
+  let yearStart=document.getElementById("yearStartValue").value
+  let yearEnd=document.getElementById("yearEndValue").value
+
+
 
   if(fname=="" || fname==null || !isNaN(fname)){
     document.getElementById("fnameError").innerText="Enter valid name"
+
   }
   if(lname=="" || lname==null || !isNaN(lname)){
     document.getElementById("lnameError").innerText="Enter valid last name"
@@ -412,6 +515,7 @@ function validation(){
    
   }
 
+  
   if(address=="" || address==null || !isNaN(address)){
     document.getElementById("addressError").innerText="Enter valid address"
   }
@@ -445,13 +549,43 @@ function validation(){
 
   if(relationship==""){
     document.getElementById("relationshipError").innerText="Please select the field"
+  }else{
+   document.getElementById("relationshipError").innerText=""
   }
 
 
   if(date==""){
     document.getElementById("dateError").innerText="Please select the date"
-    return false
+   }
+   
+
+
+  if(course==""){
+      document.getElementById("courseError").innerText="Please select the course"
+    
   }
+
+
+  if(percent==""){
+      document.getElementById("percentError").innerText="Please enter the percentage"
+     
+      
+  }
+
+  if(board==""){
+   document.getElementById("boardError").innerHTML="enter the valid university"
+  }
+
+  if(yearStart==""){
+   document.getElementById("yearStartError").innerHTML="choose the field"
+  }
+
+  if(yearEnd==""){
+   document.getElementById("yearEndError").innerHTML="choose the field"
+   return false;
+  }
+
+
 
   return true;
 }
@@ -464,13 +598,18 @@ function validation(){
   let expCount = 1;
 
   function addEducation() {
+
+  
     let table = document.getElementById("courseTable");
     eduCount++;
     let row = table.insertRow();
+    row.id=eduCount
+
+    console.log(eduCount,"counttttt");
     //    let tr=document.createElement('tr');
 
-    row.innerHTML += `  <table id="courseTable">
-        <tr>
+    row.innerHTML += `  
+        
           <td><label for="" id="course">Course: </label></td>
           <td>
             <select name="course" id="courseValues">
@@ -501,14 +640,25 @@ function validation(){
           <td><input type="text" id="yearStartValue" name="yearStart" /></td>
 
           <td><label for="" id="year">Passing Year: </label></td>
-          <td><input type="text" id="yearEndValue" name="yearEnd" /></td>
-        </tr>
+          <td><input type="text" id="yearEndValue" 1ame="yearEnd" /></td>
+          <td onclick="return addEducation()"><span class="plus" >+</span></td>
 
-      
-      </table>
+        
+          <td><span class="minus" onclick="deleteRow(${row.id})">-</span></td>
+        
     `;
 
+    console.log(row.id, "row id");
+
     return false;
+  }
+
+  function deleteRow(id){
+
+   let table = document.getElementById("courseTable");
+   eduCount--;
+   table.deleteRow(id)
+console.log(id,"iddd");
   }
 
   function addExperience() {

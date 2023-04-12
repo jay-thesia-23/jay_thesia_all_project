@@ -867,8 +867,10 @@ app.get("/editform", authentication, (req, res) => {
 
   connection.query(getPre, (err, data) => {
     pre = data;
-
-    loc_arr = pre[0].prefered_location.split(",");
+    if(pre!=undefined && pre.length!=0)
+      loc_arr = pre[0]?.prefered_location.split(",");
+    else
+      loc_arr=[]
     // loc_arr="ahme"
     console.log(loc_arr);
   });

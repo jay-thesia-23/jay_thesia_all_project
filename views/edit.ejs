@@ -404,15 +404,15 @@
       <td><input type="text" name="loc3" value="<%=loc_arr[2]%>"/></td>
 
       <td><label for="">Notice Period</label></td>
-      <td><input type="text" name="notice" id="" value="<%=pre[0].notice_period%>"></td>
+      <td><input type="text" name="notice" id="" value="<%=pre[0]?.notice_period%>"></td>
     </tr>
 
     <tr>
       <td><label for="">Expected CTC:</label></td>
-      <td><input type="text" name="ctcExp"  value="<%=pre[0].expected_ctc%>"/></td>
+      <td><input type="text" name="ctcExp"  value="<%=pre[0]?.expected_ctc%>"/></td>
 
       <td><label for="">Current CTC:</label></td>
-      <td><input type="text" name="ctcCurr" value="<%=pre[0].current_ctc%>"/></td>
+      <td><input type="text" name="ctcCurr" value="<%=pre[0]?.current_ctc%>"/></td>
     </tr>
 
 
@@ -420,11 +420,11 @@
       <td><label for="">Department: </label></td>
       <td>
         <select name="department" id="">
-          <option value="<%=pre[0].department%>"><%=pre[0].department%></option>
+          <option value="<%=pre[0]?.department%>"><%=pre[0]?.department%></option>
 
           <% for(let i=0;i<dep.length;i++){ %>   
-            <%if(dep[i].option_name!=pre[0].department){%>
-            <option value="<%=dep[i].option_name%>" name="department"><%=dep[i].option_name%></option>
+            <%if(dep[i].option_name!=pre[0]?.department){%>
+            <option value="<%=dep[i].option_name%>" name="department"><%=dep[i]?.option_name%></option>
           <%}}%>
 
           

@@ -175,7 +175,7 @@
     <div class="pagination">
       <%for(let i=1;i<=count_arr;i++){ %>
       <p
-        onclick="pagination(`/delete?id=<%=i %>&ajax=true`)"
+        onclick="pagination(`/deleteform?id=<%=i %>&ajax=true`)"
         class="<%= i==page ? 'noActive' : 'activeLink' %>"
       >
         <%=(i) %>

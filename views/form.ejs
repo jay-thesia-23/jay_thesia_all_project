@@ -203,7 +203,7 @@
        <fieldset>
           <legend>Education Details</legend>
           <table id="courseTable">
-             <tr>
+             <tr id="1">
                 <td><label for="" id="course">Course: </label></td>
                 <td>
                    <select name="course" id="courseValues">
@@ -231,41 +231,44 @@
                 <td><label for="" id="year">Passing Year: </label></td>
                 <td><input type="text" id="yearEndValue" name="yearEnd" /></td>
 
-                <td><span class="plus" onclick="return addEducation()">+</span></td>
+                <td><span class="plus staticPlus" onclick="return addEducation()">+</span></td>
+
+               <td id="staticminus"><span class="minus" onclick="deleteRow(this.id)" id="1">-</span></td>
              </tr>
 
-             <tr>
-              <div class="">
-                 <td>
-                    <p id="courseError" style="color:red"></p>
-                 </td>
-              </div>
-
-              <div class="">
-                 <td>
-                    <p id="percentError" style="color:red"> </p>
-                 </td>
-              </div>
-
-              <div> 
-               <td>
-               <p id="boardError" style="color:red"></p>
-               </td>
-             </div>
-
-              <div> 
-                <td>
-                <p id="yearStartError" style="color:red"></p>
-                </td>
-              </div>
-
-              <div>
-                <td>
-                  <p id="yearEndError" style="color:red"></p>
-                </td>
-              </div>
-             </tr>
+             
           </table>
+          <tr>
+           
+               <td>
+                  <span id="courseError" style="color:red"></span>
+               </td>
+            
+
+          
+               <td>
+                  <span id="percentError" style="color:red"> </span>
+               </td>
+           
+
+      
+             <td>
+             <span id="boardError" style="color:red"></span>
+             </td>
+           
+
+            
+              <td>
+              <span id="yearStartError" style="color:red"></span>
+              </td>
+            
+
+            
+              <td>
+                <span id="yearEndError" style="color:red"></span>
+              </td>
+      
+           </tr>
           
        </fieldset>
 
@@ -402,214 +405,219 @@
 
 
   <script>
-function maxlengthZip(){
-   var zip=document.getElementById("zip")
-   var zipError=document.getElementById("zipError")
+function maxlengthZip() {
+    var zip = document.getElementById("zip")
+    var zipError = document.getElementById("zipError")
 
-   zip.maxLength="6"
+    zip.maxLength = "6"
 
-   if(zip.value.length>="6"){
-      zipError.innerText="Max length of the zip is 6 only "
-      return false;
-   }else{
-      zipError.innerText=""
-     
-   }
+    if (zip.value.length >= "6") {
+        zipError.innerText = "Max length of the zip is 6 only "
+        return false;
+    } else {
+        zipError.innerText = ""
 
-   return true;
+    }
 
-}
-
-function maxlengthMobile(){
-   var phone=document.getElementById("phone")
-   var phoneError=document.getElementById("phoneError")
-
-   phone.maxLength="11"
-
-   if(phone.value.length>="11"){
-      phoneError.innerText="Max length of the Phone number is 10 only "
-      return false;
-   }else{
-      phoneError.innerText=""
-      return true
-   }
-
-   return true
+    return true;
 
 }
 
-let regexEmail=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-function emailCheck(){
+function maxlengthMobile() {
+    var phone = document.getElementById("phone")
+    var phoneError = document.getElementById("phoneError")
 
-   let email=document.getElementById("email").value;
-console.log("hello");
-if(!email.match(regexEmail)){
-document.getElementById("emailError").innerText="no valid Email"
-return false;
-}else{
-   document.getElementById("emailError").innerText=""
+    phone.maxLength = "11"
+
+    if (phone.value.length >= "11") {
+        phoneError.innerText = "Max length of the Phone number is 10 only "
+        return false;
+    } else {
+        phoneError.innerText = ""
+        return true
+    }
+
+    return true
 
 }
+
+let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+function emailCheck() {
+
+    let email = document.getElementById("email").value;
+    console.log("hello");
+    if (!email.match(regexEmail)) {
+        document.getElementById("emailError").innerText = "no valid Email"
+        return false;
+    } else {
+        document.getElementById("emailError").innerText = ""
+
+    }
 }
 
 
-function validation(){
+function validation() {
 
-   let tds=document.querySelectorAll("input[type=text]")
+    let tds = document.querySelectorAll("input[type=text]")
 
-console.log(tds,"tdddssss");
 
-   tds.forEach(element => {
-      console.log(element);
-   if(element.value==""){
-      document.getElementById("mainError").innerText="Please fill the fields"
-      return false;
-   }
-});
-
-  
-  
-
-  let fname=document.getElementById("fname").value;
-  let lname=document.getElementById("lname").value;
-
-  let email=document.getElementById("email").value;
-  let designation=document.getElementById("designation").value
-
-  let address =document.getElementById("address").value
-  let state=document.getElementById("stateSel").value
-
-  let phone=document.getElementById("phone").value;
-  let city=document.getElementById("city").value;
-
-  let male=document.getElementById("male").checked;
-  let female=document.getElementById("female").checked
-  let other=document.getElementById("other").checked
-  let zip=document.getElementById("zip").value;
-
-  let relationship=document.getElementById("relationship").value
-  let date=document.getElementById("date").value
-
-  let course=document.getElementById("courseValues").value
-  let percent=document.getElementById("percentValue").value
-  let board=document.getElementById("universityValues").value
-  let yearStart=document.getElementById("yearStartValue").value
-  let yearEnd=document.getElementById("yearEndValue").value
+    tds.forEach(element => {
+        console.log(element);
+        if (element.value == "") {
+            document.getElementById("mainError").innerText = "Please fill the fields"
+            return false;
+        }
+    });
 
 
 
-  if(fname=="" || fname==null || !isNaN(fname)){
-    document.getElementById("fnameError").innerText="Enter valid name"
 
-  }
-  if(lname=="" || lname==null || !isNaN(lname)){
-    document.getElementById("lnameError").innerText="Enter valid last name"
-  }
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;
 
-  if(designation=="" || designation==null || !isNaN(designation)){
-    document.getElementById("desError").innerText="Enter valid Designation"
-  }
+    let email = document.getElementById("email").value;
+    let designation = document.getElementById("designation").value
 
-  if(email=="" || email==null || !isNaN(email)){
-    document.getElementById("emailError").innerText="Enter valid Email"
-   
-  }
+    let address = document.getElementById("address").value
+    let state = document.getElementById("stateSel").value
 
-  
-  if(address=="" || address==null || !isNaN(address)){
-    document.getElementById("addressError").innerText="Enter valid address"
-  }
+    let phone = document.getElementById("phone").value;
+    let city = document.getElementById("city").value;
 
-  if(state==""){
-    document.getElementById("stateError").innerText="Please select the state"
-  }else{
-    document.getElementById("stateError").innerText=""
-  }
+    let male = document.getElementById("male").checked;
+    let female = document.getElementById("female").checked
+    let other = document.getElementById("other").checked
+    let zip = document.getElementById("zip").value;
 
-  if(phone=="" || phone==null || isNaN(phone)){
-    document.getElementById("phoneError").innerText="Enter valid Phone number"
-  }
+    let relationship = document.getElementById("relationship").value
+    let date = document.getElementById("date").value
 
-  if(city==""){
-    document.getElementById("cityError").innerText="Please select the city"
-  }else{
-    document.getElementById("cityError").innerText=""
-  }
-
-  if(male==false && female==false && other==false){
-    document.getElementById("genderError").innerText="Please select the gender"
-  }else{
-    document.getElementById("genderError").innerText=""
-  }
-
-  if(zip=="" || zip==null || isNaN(zip)){
-    document.getElementById("zipError").innerText="Enter valid zip code"
-    
-  }
-
-  if(relationship==""){
-    document.getElementById("relationshipError").innerText="Please select the field"
-  }else{
-   document.getElementById("relationshipError").innerText=""
-  }
-
-
-  if(date==""){
-    document.getElementById("dateError").innerText="Please select the date"
-   }
-   
-
-
-  if(course==""){
-      document.getElementById("courseError").innerText="Please select the course"
-    
-  }
-
-
-  if(percent==""){
-      document.getElementById("percentError").innerText="Please enter the percentage"
-     
-      
-  }
-
-  if(board==""){
-   document.getElementById("boardError").innerHTML="enter the valid university"
-  }
-
-  if(yearStart==""){
-   document.getElementById("yearStartError").innerHTML="choose the field"
-  }
-
-  if(yearEnd==""){
-   document.getElementById("yearEndError").innerHTML="choose the field"
-   return false;
-  }
+    let course = document.getElementById("courseValues").value
+    let percent = document.getElementById("percentValue").value
+    let board = document.getElementById("universityValues").value
+    let yearStart = document.getElementById("yearStartValue").value
+    let yearEnd = document.getElementById("yearEndValue").value
 
 
 
-  return true;
+    if (fname == "" || fname == null || !isNaN(fname)) {
+        document.getElementById("fnameError").innerText = "Enter valid name"
+
+    }
+    if (lname == "" || lname == null || !isNaN(lname)) {
+        document.getElementById("lnameError").innerText = "Enter valid last name"
+    }
+
+    if (designation == "" || designation == null || !isNaN(designation)) {
+        document.getElementById("desError").innerText = "Enter valid Designation"
+    }
+
+    if (email == "" || email == null || !isNaN(email)) {
+        document.getElementById("emailError").innerText = "Enter valid Email"
+
+    }
+
+    if (address == "" || address == null || !isNaN(address)) {
+        document.getElementById("addressError").innerText = "Enter valid address"
+    }
+
+    if (state == "") {
+        document.getElementById("stateError").innerText = "Please select the state"
+    } else {
+        document.getElementById("stateError").innerText = ""
+    }
+
+    if (phone == "" || phone == null || isNaN(phone)) {
+        document.getElementById("phoneError").innerText = "Enter valid Phone number"
+    }
+
+    if (city == "") {
+        document.getElementById("cityError").innerText = "Please select the city"
+    } else {
+        document.getElementById("cityError").innerText = ""
+    }
+
+    if (male == false && female == false && other == false) {
+        document.getElementById("genderError").innerText = "Please select the gender"
+    } else {
+        document.getElementById("genderError").innerText = ""
+    }
+
+    if (zip == "" || zip == null || isNaN(zip)) {
+        document.getElementById("zipError").innerText = "Enter valid zip code"
+
+    }
+
+    if (relationship == "") {
+        document.getElementById("relationshipError").innerText = "Please select the field"
+    } else {
+        document.getElementById("relationshipError").innerText = ""
+    }
+
+    if (date == "") {
+        document.getElementById("dateError").innerText = "Please select the date"
+    }
+
+    if (course == "") {
+        document.getElementById("courseError").innerText = "Please select the course"
+
+    }
+
+
+    if (percent == "") {
+        document.getElementById("percentError").innerText = "Please enter the percentage"
+
+    }
+
+    if (board == "") {
+        document.getElementById("boardError").innerHTML = "enter the valid university"
+    }
+
+    if (yearStart == "") {
+        document.getElementById("yearStartError").innerHTML = "choose the field"
+    }
+
+    if (yearEnd == "") {
+        document.getElementById("yearEndError").innerHTML = "choose the field"
+        return false;
+    }
+
+
+
+    return true;
 }
 
-  let addEdu = document.getElementById("newEdu");
-  let mainEdu = document.getElementById("courseTable").value;
 
-  let eduCount = 1;
-  let techCount = 1;
-  let expCount = 1;
 
-  function addEducation() {
 
-  
+let addEdu = document.getElementById("newEdu");
+let mainEdu = document.getElementById("courseTable").value;
+let eduCount = 2;
+let techCount = 1;
+let expCount = 1;
+
+
+let staticminus = document.getElementById("staticminus")
+
+if (eduCount <= 2) {
+    staticminus.style.visibility = "hidden"
+}
+
+function addEducation() {
+
+
     let table = document.getElementById("courseTable");
-    eduCount++;
-    let row = table.insertRow();
-    row.id=eduCount
 
-    console.log(eduCount,"counttttt");
+    let row = table.insertRow();
+    row.id = eduCount
+
+  
     //    let tr=document.createElement('tr');
+    let staticminus = document.getElementById("staticminus")
 
     row.innerHTML += `  
-        
+        <tr id=eduCount>
           <td><label for="" id="course">Course: </label></td>
           <td>
             <select name="course" id="courseValues">
@@ -644,24 +652,54 @@ console.log(tds,"tdddssss");
           <td onclick="return addEducation()"><span class="plus" >+</span></td>
 
         
-          <td><span class="minus" onclick="deleteRow(${row.id})">-</span></td>
-        
+          <td><span class="minus" id=${row.id} onclick="deleteRow(this.id)">-</span></td>
+        </tr>
     `;
 
-    console.log(row.id, "row id");
+
+    if (eduCount >= 2) {
+
+        staticminus.style.visibility = "visible"
+    }else{
+
+    }
+    eduCount++;
+
+
+
 
     return false;
-  }
+}
 
-  function deleteRow(id){
+function deleteRow(id) {
 
-   let table = document.getElementById("courseTable");
-   eduCount--;
-   table.deleteRow(id)
-console.log(id,"iddd");
-  }
+   console.log(id,"curr id to delete");
+    let table = document.getElementById("courseTable");
 
-  function addExperience() {
+    console.log(eduCount,"before delete count");
+    eduCount--;
+    console.log(eduCount,"after delete count");
+    
+    table.deleteRow(id)
+    
+
+
+    if (eduCount <= 2) {
+        
+        staticminus.style.visibility = "hidden"
+    }
+   
+
+
+
+
+
+
+
+
+}
+
+function addExperience() {
     let table = document.getElementById("experiencetbl");
     let row = table.insertRow();
 
@@ -683,34 +721,35 @@ console.log(id,"iddd");
       </table>
 `;
 
-        return false;
-  }
-
-  var valueState;
-  var temp="";
-  var city;
 
 
-function check(){
-   valueState=document.getElementById("stateSel");
-   city=document.getElementById("city");
+    return false;
+}
 
-  // console.log(valueState);
+var valueState;
+var temp = "";
+var city;
 
 
-fetch("/getCity?state="+valueState.value)
-.then(res=> res.json())
-.then((response2)=>{
-  temp=""
-console.log(response2);
+function check() {
+    valueState = document.getElementById("stateSel");
+    city = document.getElementById("city");
 
-        for(var i = 0; i < response2.length; i++)
-        {
-            temp += '<option value="'+response2[i].city_name+'">'+response2[i].city_name+'</option>';
-            
-        }
-        city.innerHTML=temp
-})
+    // console.log(valueState);
+
+
+    fetch("/getCity?state=" + valueState.value)
+        .then(res => res.json())
+        .then((response2) => {
+            temp = ""
+            console.log(response2);
+
+            for (var i = 0; i < response2.length; i++) {
+                temp += '<option value="' + response2[i].city_name + '">' + response2[i].city_name + '</option>';
+
+            }
+            city.innerHTML = temp
+        })
 
 }
 
